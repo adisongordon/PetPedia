@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pet Pedia</title>
+
+    <style>
+        body {
+            background-color: #F0FFFF; /* Light blue/azure background */
+            color: #000000; /* Black text */
+            margin: 0; /* Remove default margin */
+            overflow: hidden; /* Hide scrollbars */
+        }
+        header {
+            height: 100px; /* Fixed header height */
+            /* Add other styling for your header here */
+        }
+        .carousel,
+        .carousel-inner,
+        .carousel-item,
+        .carousel-item img {
+            height: calc(100vh - 60px);
+            object-fit: cover;
+        }
+        .carousel-caption {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 1rem;
+            border-radius: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        h2, p {
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Text shadow for readability */
+        }
+    </style>
+</head>
+
+<body style="background-color:rgba(248,254,229,255)">
+<div th:insert="fragments/header.html :: header"/>
+<div id="home-carousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+
+            /* add videos or pics for carousel */
+
+            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
+                <p class="fs-3 mt-5" style="color:#226b32"><strong>Do something good for your pets and your local community</strong></p>
+            </div>
+        </div>
+        <div class="carousel-item">
+
+            /* add videos or pics for carousel */
+
+            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
+                <h3 class="display-1 fw-bolder text-capitalize" style="color:#226b32">Sustain N Share</h3>
+                <p class="fs-3 mt-5" style="color:#226b32"><strong>Revolutionizing Pet Care and Fostering Animal Education</strong></p>
+            </div>
+        </div>
+        <div class="carousel-item">
+
+            /* add videos or pics for carousel */
+
+            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
+                <p class="fs-3 mt-5" style="color:#226b32"><strong>Figure out what pet is best suited for your lifestyle! </strong></p>
+
+                /* insert link to Pet Decision Tree */
+
+            </div>
+        </div>
+        <div class="carousel-item">
+
+            /* add videos or pics for carousel */
+
+            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
+                <p class="fs-3 mt-5"><strong>It's estimated that recycling could reduce carbon emissions by 10.4-11.2Gt by 2050</strong></p>
+                <a href="https://www.bbc.com/future/article/20230317-how-recycling-can-help-the-climate-and-other-facts" target="_blank">"How recycling can help the climate and other facts", BBC</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+
+            /* add videos or pics for carousel */
+
+            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
+                <p class="fs-3 mt-5" style="color:#226b32"><strong>With your help, we can uplift animal welfare and provide a better life for everyone </strong></p>
+            </div>
+        </div>
+        <div class="carousel-item">
+
+            /* add videos or pics for carousel */
+
+            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
+                <p class="fs-3 mt-5"><strong>Approximately 6.3 million companion animals enter U.S. animal shelters nationwide every year.</strong></p>
+                <a href="https://www.aspca.org/helping-people-pets/shelter-intake-and-surrender/pet-statistics" target="_blank">"Donate To Local Shelters", quench</a>
+            </div>
+        </div>
+    </div>
+    <h2> <strong> Welcome to Pet Pedia! </strong></h2>
+    <p>Pet-Pedia serves as a comprehensive resource for current and prospective pet owners, addressing the myriad questions surrounding their pets’ needs and well-being. In contrast to the ambiguity of generalized online searches, our website offers a centralized, reliable platform. </p>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#home-carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#home-carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<div th:insert="fragments/footer.html :: footer"/>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+
