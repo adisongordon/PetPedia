@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Pedia</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Customize navbar style */
+        .navbar-brand img {
+          height: 30px; /* Adjust height of the logo */
+        }
+    </style>
+
+    <style>
+        body {
+            background-color: #F0FFFF; /* Light blue/azure background */
+            color: #000000; /* Black text */
+            margin: 0; /* Remove default margin */
+            overflow: hidden; /* Hide scrollbars */
+        }
+        header {
+            height: 100px; /* Fixed header height */
+            /* Add other styling for your header here */
+        }
+        .carousel,
+        .carousel-inner,
+        .carousel-item,
+        .carousel-item img {
+            height: calc(100vh - 60px);
+            object-fit: cover;
+        }
+        .carousel-caption {
+            background-color: rgba(255, 255, 255, 0);
+            padding: 1rem;
+            border-radius: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        h2, p {
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Text shadow for readability */
+        }
+    </style>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <!-- Logo and website name -->
+        <a class="navbar-brand" href="#">
+            <img src="path/to/your/logo.png" alt="Logo">
+            Pet Pedia
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Decision Tree</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Forum</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Shelters</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Map</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<body style="background-color:rgba(255,255,255,0)">
+<!--<div th:insert="fragments/header.html :: header"/>-->
+<div id="home-carousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+
+            /* add videos or pics for carousel */
+
+            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
+                <p class="fs-3 mt-5" style="color:#2d739c"><strong>Do something good for your pets and your local community</strong></p>
+            </div>
+        </div>
+        <div class="carousel-item">
+
+            /* add videos or pics for carousel */
+
+            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
+                <h3 class="display-1 fw-bolder text-capitalize" style="color:#2d739c">Pet Pedia</h3>
+                <p class="fs-3 mt-5" style="color:#2d739c"><strong>Revolutionizing Pet Care and Fostering Animal Education</strong></p>
+            </div>
+        </div>
+        <div class="carousel-item">
+
+            /* add videos or pics for carousel */
+
+            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
+                <p class="fs-3 mt-5" style="color:#2d739c"><strong>Figure out what pet is best suited for your lifestyle! </strong></p>
+
+                /* insert link to Pet Decision Tree */
+
+            </div>
+        </div>
+        <div class="carousel-item">
+
+            /* add videos or pics for carousel */
+
+            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
+                <p class="fs-3 mt-5"><strong>Approximately 4.1 million shelter animals are adopted each year</strong></p>
+                <a href="https://www.aspca.org/helping-people-pets/shelter-intake-and-surrender/pet-statistics" target="_blank">"Pet Statistics", ASPCA</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+
+            /* add videos or pics for carousel */
+
+            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
+                <p class="fs-3 mt-5" style="color:#2d739c"><strong>With your help, we can uplift animal welfare and provide a better life for everyone </strong></p>
+            </div>
+        </div>
+        <div class="carousel-item">
+
+            /* add videos or pics for carousel */
+
+            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
+                <p class="fs-3 mt-5"><strong>Approximately 6.3 million companion animals enter U.S. animal shelters nationwide every year.</strong></p>
+                <a href="https://www.aspca.org/helping-people-pets/shelter-intake-and-surrender/pet-statistics" target="_blank">"Donate To Local Shelters", quench</a>
+            </div>
+        </div>
+    </div>
+    <h2> <strong> Welcome to Pet Pedia! </strong></h2>
+    <p>Pet-Pedia serves as a comprehensive resource for current and prospective pet owners, addressing the myriad questions surrounding their pets’ needs and well-being. In contrast to the ambiguity of generalized online searches, our website offers a centralized, reliable platform. </p>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#home-carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#home-carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+
+<!--<div th:insert="fragments/footer.html :: footer"/>-->
+
+/* Footers go here  */
+
+</body>
+</html>
+
