@@ -1,0 +1,16 @@
+/* Customize navbar style */
+.navbar-brand img {
+    height: 40px; /* Adjust height of the logo */
+}
+
+header {
+    height: 100px; /* Fixed header height */
+    /* Add other styling for your header here */
+}
+
+body {
+    background-color: #F0FFFF; /* Light blue/azure background */
+    color: #000000; /* Black text */
+    margin: 0; /* Remove default margin */
+    overflow: hidden; /* Hide scrollbars */
+}
