@@ -13,5 +13,5 @@ body {
     background-color: #F0FFFF; /* Light blue/azure background */
     color: #000000; /* Black text */
     margin: 0; /* Remove default margin */
-    overflow: hidden; /* Hide scrollbars */
+    overflow: visible; /* Show scrollbars */
 }
