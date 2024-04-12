@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Pedia</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/style.css}" />
+    <style>
+        /* Customize navbar style */
+        .navbar-brand img {
+            height: 30px; /* Adjust height of the logo */
+        }
+
+        .carousel-container {
+            padding: 20px; /* Add padding around the carousel */
+        }
+
+        .carousel {
+            /* Adjust width and margin as needed */
+            width: 100%;
+            margin: 0 auto;
+        }
+    </style>
+
+    <style>
+        body {
+            background-color: #F0FFFF; /* Light blue/azure background */
+            color: #000000; /* Black text */
+            margin: 0; /* Remove default margin */
+            overflow: hidden; /* Hide scrollbars */
+        }
+
+        header {
+            height: 200px; /* Fixed header height */
+            padding: 100px;
+            margin: 0;
+        }
+
+        .carousel {
+
+            padding: 0; /* Remove padding */
+        }
+
+        .carousel-caption {
+            background-color: rgba(255, 255, 255, 0);
+            padding: 1rem;
+            border-radius: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-align: center;
+        }
+        .carousel-caption {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+        }
+
+        h2, p {
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow for readability */
+        }
+        .content {
+            text-align: center;
+            padding: 20px 0; /* Added padding to content */
+        }
+    </style>
+</head>
+
+<body>
+<div th:insert="fragments/header.html :: header"></div>
+
+<div class="carousel-container">
+    <div id="home-carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <!-- add pics or videos -->
+                <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
+                    <p class="fs-3 mt-5" style="color:#46eab1"><strong>Do something good for your pets and your local
+                        community</strong></p>
+                </div>
+            </div>
+            <!-- Additional carousel items -->
+            <!-- ... -->
+        </div>
+
+        <!-- Navigation buttons -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#home-carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#home-carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<h2><strong> Welcome to Pet Pedia! </strong></h2>
+<p>Pet-Pedia serves as a comprehensive resource for current and prospective pet owners, addressing the myriad
+    questions surrounding their pets’ needs and well-being. In contrast to the ambiguity of generalized online
+    searches, our website offers a centralized, reliable platform. </p>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.carousel').carousel();
+    });
+</script>
+</body>
+</html>
