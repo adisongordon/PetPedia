@@ -39,11 +39,12 @@
             padding: 1rem;
             border-radius: 10px;
             position: absolute;
-            top: 50%;
+            top: auto;
+            bottom: 25%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80%;
-            height: 200px;
+            width: 50%;
+            height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -63,17 +64,23 @@
             margin-right: auto;
             width: 50%;
         }
-        .contents-container {
-            background-color: rgba(232, 234, 231, 1);
+        .content-container {
             padding: 20px;
             overflow: scroll;
+        }
+
+        .carousel-control-next-icon,
+        .carousel-control-prev-icon {
+            width: 2vw;
+            height: 2vw;
+            background-color: lightgray;
         }
     </style>
 </head>
 
 <body style="background-color:rgba(255,255,255,0)">
 <div th:replace="~{fragments/header :: header}"></div>
-<div class="contents-container">
+<div class="content-container">
     <div class="carousel-container">
         <div id="home-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
@@ -89,11 +96,11 @@
             </div>
 
             <!-- Navigation buttons -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#home-carousel" data-bs-slide="prev">
+            <button class="carousel-control-prev" role="button" data-bs-target="#home-carousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#home-carousel" data-bs-slide="next">
+            <button class="carousel-control-next" role="button" data-bs-target="#home-carousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
