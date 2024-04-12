@@ -5,50 +5,29 @@
     <title>Pet Pedia</title>
 </head>
 <body>
-<footer class="bg-body-tertiary text-center text-lg-start">
-    <!-- Grid container -->
-    <div class="container p-4 pb-0">
-        <form action="">
-            <!--Grid row-->
-            <div class="row">
-                <!--Grid column-->
-                <div class="col-auto mb-4 mb-md-0">
-                    <p class="pt-2">
-                        <strong>Sign up for our newsletter</strong>
-                    </p>
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-md-5 col-12 mb-4 mb-md-0">
-                    <!-- Email input -->
-                    <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="email" id="form5Example22" class="form-control" />
-                        <label class="form-label" for="form5Example22">Email address</label>
-                    </div>
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-auto mb-4 mb-md-0">
-                    <!-- Submit button -->
-                    <button data-mdb-ripple-init type="button" class="btn btn-primary mb-4">
-                        Subscribe
-                    </button>
-                </div>
-                <!--Grid column-->
+<footer class="bg-body-tertiary text-center text-md-start" th:fragment="footer">
+    <div class="container p-4">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                <h5>About Us</h5>
+                <p>Pet Pedia serves as a comprehensive resource for current and prospective pet owners,
+                    addressing the myriad questions surrounding their pets' needs and well-being.</p>
             </div>
-            <!--Grid row-->
-        </form>
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5>Contact Us</h5>
+                <p>Email: petpedia@gmail.com</p>
+                <p>Phone: 123-456-7890</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5>Follow Us</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <!-- Grid container -->
 
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2020 Copyright:
-        <a class="text-body" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-    </div>
-    <!-- Copyright -->
 </footer>
 </body>
 </html>
