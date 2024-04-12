@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Prototype</title>
+    <style>
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f9f9f9;
+          min-width: 160px;
+          box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+
+        .dropdown-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+        }
+
+        .dropdown-content a:hover {
+          background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+
+        .search-box {
+          margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<label for="dropdown">I am a:</label>
+<select id="dropdown">
+    <option value="Current Pet Owner">Current Pet Owner</option>
+    <option value="Prospective Pet Owner">Prospective Pet Owner</option>
+</select>
+
+<div class="search-box">
+  <input id="location-box" type="text" onchange="locationChanged()" placeholder="Location...">
+</div>
+
+<iframe
+        id="map"
+        width="800"
+        height="400"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg&q=pet+stores+in+Ogden"
+        allowfullscreen>
+</iframe>
+
+<script>
+    function locationChanged() {
+      document.getElementById("map").src = "https://www.google.com/maps/embed/v1/search?key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg&q=pet+stores+in+" + document.getElementById("location-box").value;
+    }
+</script>
+
+</body>
+</html>
