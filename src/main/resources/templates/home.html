@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Pedia</title>
+    <title>Pet-Pedia</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         /* Customize navbar style */
         .navbar-brand img {
             height: 40px; /* Adjust height of the logo */
         }
-    </style>
 
-    <style>
+        header {
+            height: 200px; /* Fixed header height */
+            padding: 100px;
+            margin: 0;
+        }
+
         body {
             background-color: #F0FFFF; /* Light blue/azure background */
             color: #000000; /* Black text */
@@ -20,17 +24,14 @@
             overflow: hidden; /* Hide scrollbars */
         }
 
-        header {
-            height: 100px; /* Fixed header height */
-            /* Add other styling for your header here */
-        }
-
         .carousel,
         .carousel-inner,
-        .carousel-item,
-        .carousel-item img {
-            height: calc(100vh - 60px);
-            object-fit: cover;
+        .carousel-container{
+            /* Adjust width and margin as needed */
+            width: 100%;
+            height: 600px;
+            margin: 0 auto;
+            padding: 10px;
         }
 
         .carousel-caption {
@@ -38,11 +39,12 @@
             padding: 1rem;
             border-radius: 10px;
             position: absolute;
-            top: 50%;
+            top: auto;
+            bottom: 25%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80%;
-            height: 200px;
+            width: 50%;
+            height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -52,92 +54,77 @@
 
         h2, p {
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow for readability */
+            text-align: center;
+            padding: 20px 0; /* Added padding to content */
+        }
+
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+        .content-container {
+            padding: 20px;
+            overflow: scroll;
+        }
+
+        .carousel-control-next-icon,
+        .carousel-control-prev-icon {
+            width: 2vw;
+            height: 2vw;
+            background-color: lightgray;
         }
     </style>
 </head>
 
 <body style="background-color:rgba(255,255,255,0)">
 <div th:replace="~{fragments/header :: header}"></div>
-<div id="home-carousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-
-            /* add videos or pics for carousel */
-
-            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
-                <p class="fs-3 mt-5" style="color:#2d739c"><strong>Do something good for your pets and your local
-                    community</strong></p>
+<div class="content-container">
+    <div class="carousel-container">
+        <div id="home-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/images/orange-kitty.jpg" class="center" alt="Orange Kitty">
+                    <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
+                        <p class="fs-3 mt-5" style="color:#46eab1"><strong>Do something good for your pets and your local
+                            community</strong></p>
+                    </div>
+                </div>
+                <!-- Additional carousel items -->
+                <!-- ... -->
             </div>
-        </div>
-        <div class="carousel-item">
 
-            /* add videos or pics for carousel */
-
-            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
-                <h3 class="display-1 fw-bolder text-capitalize" style="color:#2d739c">Pet Pedia</h3>
-                <p class="fs-3 mt-5" style="color:#2d739c"><strong>Revolutionizing Pet Care and Fostering Animal
-                    Education</strong></p>
-            </div>
-        </div>
-        <div class="carousel-item">
-
-            /* add videos or pics for carousel */
-
-            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
-                <p class="fs-3 mt-5" style="color:#2d739c"><strong>Figure out what pet is best suited for your
-                    lifestyle! </strong></p>
-
-                /* insert link to Pet Decision Tree */
-
-            </div>
-        </div>
-        <div class="carousel-item">
-
-            /* add videos or pics for carousel */
-
-            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
-                <p class="fs-3 mt-5"><strong>Approximately 4.1 million shelter animals are adopted each year</strong>
-                </p>
-                <a href="https://www.aspca.org/helping-people-pets/shelter-intake-and-surrender/pet-statistics"
-                   target="_blank">"Pet Statistics", ASPCA</a>
-            </div>
-        </div>
-        <div class="carousel-item">
-
-            /* add videos or pics for carousel */
-
-            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
-                <p class="fs-3 mt-5" style="color:#2d739c"><strong>With your help, we can uplift animal welfare and
-                    provide a better life for everyone </strong></p>
-            </div>
-        </div>
-        <div class="carousel-item">
-
-            /* add videos or pics for carousel */
-
-            <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
-                <p class="fs-3 mt-5"><strong>Approximately 6.3 million companion animals enter U.S. animal shelters
-                    nationwide every year.</strong></p>
-                <a href="https://www.aspca.org/helping-people-pets/shelter-intake-and-surrender/pet-statistics"
-                   target="_blank">"Donate To Local Shelters", quench</a>
-            </div>
+            <!-- Navigation buttons -->
+            <button class="carousel-control-prev" role="button" data-bs-target="#home-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" role="button" data-bs-target="#home-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
-    <h2><strong> Welcome to Pet Pedia! </strong></h2>
+
+    <h2><strong> Welcome to Pet-Pedia! </strong></h2>
     <p>Pet-Pedia serves as a comprehensive resource for current and prospective pet owners, addressing the myriad
         questions surrounding their pets’ needs and well-being. In contrast to the ambiguity of generalized online
         searches, our website offers a centralized, reliable platform. </p>
+
 </div>
 
-<button class="carousel-control-prev" type="button" data-bs-target="#home-carousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-</button>
-<button class="carousel-control-next" type="button" data-bs-target="#home-carousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-</button>
+
 <div th:replace="~{fragments/footer :: footer}"></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.carousel').carousel();
+    });
+</script>
 </body>
 </html>
 
