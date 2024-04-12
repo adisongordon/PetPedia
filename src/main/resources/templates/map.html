@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Map Prototype</title>
+    <title>Pet Pedia</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* Customize navbar style */
+        .navbar-brand img {
+            height: 40px; /* Adjust height of the logo */
+        }
+
         .dropdown {
           position: relative;
           display: inline-block;
@@ -37,34 +43,42 @@
         .search-box {
           margin-top: 10px;
         }
+
+        .content-container {
+            padding: 20px;
+            overflow: scroll;
+            align-content: center;
+        }
     </style>
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}"></div>
+<div class="content-container">
+    <label for="dropdown">I am a:</label>
+    <select id="dropdown">
+        <option value="Current Pet Owner">Current Pet Owner</option>
+        <option value="Prospective Pet Owner">Prospective Pet Owner</option>
+    </select>
 
-<label for="dropdown">I am a:</label>
-<select id="dropdown">
-    <option value="Current Pet Owner">Current Pet Owner</option>
-    <option value="Prospective Pet Owner">Prospective Pet Owner</option>
-</select>
+    <div class="search-box">
+        <input id="location-box" type="text" onchange="locationChanged()" placeholder="Location...">
+    </div>
 
-<div class="search-box">
-  <input id="location-box" type="text" onchange="locationChanged()" placeholder="Location...">
+    <iframe
+            id="map"
+            width="800"
+            height="400"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg&q=pet+stores+in+Ogden"
+            allowfullscreen>
+    </iframe>
+
+    <script>
+        function locationChanged() {
+            document.getElementById("map").src = "https://www.google.com/maps/embed/v1/search?key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg&q=pet+stores+in+" + document.getElementById("location-box").value;
+        }
+    </script>
 </div>
-
-<iframe
-        id="map"
-        width="800"
-        height="400"
-        referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg&q=pet+stores+in+Ogden"
-        allowfullscreen>
-</iframe>
-
-<script>
-    function locationChanged() {
-      document.getElementById("map").src = "https://www.google.com/maps/embed/v1/search?key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg&q=pet+stores+in+" + document.getElementById("location-box").value;
-    }
-</script>
-
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
