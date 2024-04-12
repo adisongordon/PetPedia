@@ -3,30 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet-Pedia</title>
+    <title>Pet Pedia</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+
     <style>
-        /* Customize navbar style */
-        .navbar-brand img {
-            height: 40px; /* Adjust height of the logo */
-        }
-
-        header {
-            height: 200px; /* Fixed header height */
-            padding: 100px;
-            margin: 0;
-        }
-
-        body {
-            background-color: #F0FFFF; /* Light blue/azure background */
-            color: #000000; /* Black text */
-            margin: 0; /* Remove default margin */
-            overflow: hidden; /* Hide scrollbars */
-        }
-
         .carousel,
         .carousel-inner,
-        .carousel-container{
+        .carousel-container {
             /* Adjust width and margin as needed */
             width: 100%;
             height: 600px;
@@ -64,6 +48,7 @@
             margin-right: auto;
             width: 50%;
         }
+
         .content-container {
             padding: 20px;
             overflow: scroll;
@@ -87,7 +72,8 @@
                 <div class="carousel-item active">
                     <img src="/images/orange-kitty.jpg" class="center" alt="Orange Kitty">
                     <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
-                        <p class="fs-3 mt-5" style="color:#46eab1"><strong>Do something good for your pets and your local
+                        <p class="fs-3 mt-5" style="color:#46eab1"><strong>Do something good for your pets and your
+                            local
                             community</strong></p>
                     </div>
                 </div>
@@ -121,10 +107,11 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('.carousel').carousel();
     });
 </script>
+
 </body>
 </html>
 
