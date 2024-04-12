@@ -4,8 +4,9 @@
 }
 
 header {
-    height: 100px; /* Fixed header height */
-    /* Add other styling for your header here */
+    height: 200px; /* Fixed header height */
+    padding: 100px;
+    margin: 0;
 }
 
 body {
