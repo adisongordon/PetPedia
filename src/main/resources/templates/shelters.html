@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Pedia</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+
+    <style>
+        :root {
+            /* COLORS */
+            --white: #e9e9e9;
+            --gray: #333;
+            --blue: #0367a6;
+            --lightblue: #008997;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            border-radius: 5px;
+            width: 600px;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+        .btn {
+            background-color: #0367a6;
+            background-image: linear-gradient(90deg, #0367a6 0%, #008997 74%);
+            border-radius: 20px;
+            border: 1px solid #0367a6;
+            color: #e9e9e9;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 0.1rem;
+            padding: 0.9rem 4rem;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in;
+        }
+
+        .form > .btn {
+            margin-top: 1.5rem;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn:focus {
+            outline: none;
+        }
+    </style>
+
+</head>
+<body style="background-color:rgba(248,254,229,255)">
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="px-2 py-2">
+            <div class="Boxer">
+                <img src="/images/boxer.png"
+                     width=200px
+                     height=200px
+                     alt="Oopsies">
+                <h2>Boxers</h2>
+                <p>The Boxer is a medium to large, short-haired dog breed of mastiff-type,
+                    developed in Germany. The coat is smooth and tight-fitting; colors are fawn,
+                    brindled, or white, with or without white markings.</p>
+            </div>
+            <div class="col-xs-1">
+                <p class="card-text" >Loyalty, affection, intelligence, work ethic,
+                    and good looks: Boxers are the whole doggy package. Bright and alert,
+                    sometimes silly, but always courageous, the Boxer has been among
+                    America's most popular dog breeds for a very long time.</p>
+                <a class="btn">Read More</a>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="px-2 py-2">
+            <div class="Ruff Haven">
+                <img src="/images/ruffhaven.png"
+                     width=200px
+                     height=200px
+                     alt="">
+                <h2>Ruff Haven</h2>
+                <p>Ruff Haven info goes here </p>
+            </div>
+            <div class="col-xs-1">
+                <p class="card-text" >Ruff Haven Crisis Sheltering was founded in 2020 by a group of four animal-loving
+                    friends who met while volunteering at various animal welfare organizations in Salt Lake County.
+                    After working with many people experiencing homelessness and other vulnerable populations they saw a
+                    tremendous need for temporary crisis sheltering services in the community. They believe the future of
+                    animal welfare will strongly focus on pet retention and keeping pets with their people whenever
+                    possible. The co-founders recruited several other passionate people involved in both animal and human
+                    welfare organizations to join their Board of Directors. Ruff Haven Crisis Sheltering understands
+                    animal welfare is not only about serving pets but also about serving people. We believe animal welfare
+                    IS human welfare. </p>
+                <a class="btn">Read More</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
