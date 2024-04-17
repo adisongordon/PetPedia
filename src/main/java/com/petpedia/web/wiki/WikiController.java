@@ -1,4 +1,4 @@
-package com.petpedia.web.articles;
+package com.petpedia.web.wiki;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @RequiredArgsConstructor
-public class ArticlesController {
+public class WikiController {
 
-    @GetMapping("/articles")
-    public String Articles() {
-        return "articles";
+    @GetMapping("/wiki")
+    public String Wiki() {
+        return "wiki";
     }
 }
