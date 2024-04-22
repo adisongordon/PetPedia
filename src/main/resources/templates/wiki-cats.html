@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Pedia</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+
+    <style>
+        :root {
+            /* COLORS */
+            --white: #e9e9e9;
+            --gray: #333;
+            --blue: #0367a6;
+            --lightblue: #008997;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            border-radius: 5px;
+            width: 600px;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+        .btn {
+            background-color: #0367a6;
+            background-image: linear-gradient(90deg, #0367a6 0%, #008997 74%);
+            border-radius: 20px;
+            border: 1px solid #0367a6;
+            color: #e9e9e9;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 0.1rem;
+            padding: 0.9rem 4rem;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+        }
+
+        .form > .btn {
+            margin-top: 1.5rem;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn:focus {
+            outline: none;
+        }
+    </style>
+
+</head>
+<body style="background-color:rgba(232,234,231)">
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="container mt-5">
+    <h1 style="text-align: center; color:#226b32">Wiki</h1>
+    <br>
+    <div class="mr-2" style="margin-right:10px;">
+        <div class="card">
+            <div class="px-2 py-2">
+                <div class="American-Shorthair">
+                    <img src="/images/domestic-shorthair.jpeg" alt="" style="width:70%; height:auto" class="center">
+                    <h2>American Shorthair</h2>
+                    <p>The American Shorthair cat, a symbol of American history and charm, boasts a sturdy build and a
+                        distinctive coat marked by an array of captivating colors and patterns. Renowned for their friendly
+                        demeanor and easygoing nature, these cats make wonderful companions for families and individuals alike.
+                        With their affectionate disposition and playful spirit, American Shorthairs effortlessly weave themselves i
+                        nto the fabric of our lives, bringing joy and companionship to those fortunate enough to share their homes.</p>
+                    <a class="btn">Read More</a>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="px-2 py-2">
+                <div class="Persian">
+                    <img src="/images/blue-persian.png" alt="" style="width:70%; height:auto" class="center">
+                    <h2>Persian</h2>
+                    <p>Persian cats, with their luxurious, flowing coats and sweet, expressive faces, are renowned for their
+                        regal demeanor and gentle nature. Originating from the ancient lands of Persia (modern-day Iran),
+                        these feline beauties have captivated hearts around the world with their elegant presence. Known
+                        for their laid-back temperament and affectionate disposition, Persian cats thrive in tranquil environments
+                        where they can indulge in leisurely lounging and occasional bursts of playful energy. Their endearing
+                        personalities and stunning looks make them cherished companions, adored for their loyalty and grace.</p>
+                    <a class="btn">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

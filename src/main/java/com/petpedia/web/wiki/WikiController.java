@@ -12,4 +12,14 @@ public class WikiController {
     public String Wiki() {
         return "wiki";
     }
+
+    @GetMapping("/wiki/dogs")
+    public String getDogs() {
+        return "wiki-dogs";
+    }
+
+    @GetMapping("/wiki/cats")
+    public String getCats() {
+        return "wiki-cats";
+    }
 }
