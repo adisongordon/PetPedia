@@ -59,7 +59,7 @@
             width: 100px;
         }
 
-        img {
+        #breedImg {
             display: block;
             width: 100%;
             height: auto;
@@ -114,6 +114,7 @@
 
         var breedImg = document.createElement('img');
         breedImg.src = Object.hasOwn(breedInfo, 'image') ? breedInfo.image.url : "";
+        breedImg.setAttribute('id', 'breedImg');
         breedDiv.appendChild(breedImg);
 
         var breedHeader = document.createElement('h2');
