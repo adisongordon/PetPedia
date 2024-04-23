@@ -54,6 +54,16 @@
         .btn:focus {
             outline: none;
         }
+
+        .parent {
+            width: 100px;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
     </style>
 
 </head>
@@ -64,41 +74,108 @@
     <h1 style="text-align: center; color:#226b32">Wiki</h1>
     <br>
     <div class="mr-2" style="margin-right:10px;">
-        <div class="card">
-            <div class="px-2 py-2">
-                <div class="American-Shorthair">
-                    <img src="/images/domestic-shorthair.jpeg" alt="" style="width:70%; height:auto" class="center">
-                    <h2>American Shorthair</h2>
-                    <p>The American Shorthair cat, a symbol of American history and charm, boasts a sturdy build and a
-                        distinctive coat marked by an array of captivating colors and patterns. Renowned for their friendly
-                        demeanor and easygoing nature, these cats make wonderful companions for families and individuals alike.
-                        With their affectionate disposition and playful spirit, American Shorthairs effortlessly weave themselves i
-                        nto the fabric of our lives, bringing joy and companionship to those fortunate enough to share their homes.</p>
-                    <a class="btn">Read More</a>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="px-2 py-2">
-                <div class="Persian">
-                    <img src="/images/blue-persian.png" alt="" style="width:70%; height:auto" class="center">
-                    <h2>Persian</h2>
-                    <p>Persian cats, with their luxurious, flowing coats and sweet, expressive faces, are renowned for their
-                        regal demeanor and gentle nature. Originating from the ancient lands of Persia (modern-day Iran),
-                        these feline beauties have captivated hearts around the world with their elegant presence. Known
-                        for their laid-back temperament and affectionate disposition, Persian cats thrive in tranquil environments
-                        where they can indulge in leisurely lounging and occasional bursts of playful energy. Their endearing
-                        personalities and stunning looks make them cherished companions, adored for their loyalty and grace.</p>
-                    <a class="btn">Read More</a>
-                </div>
-            </div>
-        </div>
     </div>
 
 </div>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+<script>
+    const breeds_url = "https://api.thecatapi.com/v1/breeds";
+    const img_url = "https://api.thecatapi.com/v1/images/";
+    const api_key = "live_gV2BbWyIAPtYEYqvvtjBmrpOvt5ntQ56pY79wDhD5EDG0MaoBzZantEmIUvp9ir5";
+    let breeds = [];
+
+    fetch(breeds_url, { headers: { 'x-api-key': api_key }})
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        //data = data.filter(img=> img.image?.url!=null);
+        breeds = data;
+
+        for (let i = 0; i < breeds.length; i++) {
+            //if (!breeds[i].image) continue;
+            document.getElementsByClassName('container mt-5')[0].appendChild(makeCard(breeds[i]));
+        }
+    });
+
+    function makeCard(breedInfo) {
+        var newCard = document.createElement('div');
+        newCard.className = 'card';
+
+        var pxpy = document.createElement('div');
+        pxpy.className = 'px-2 py-2';
+        newCard.appendChild(pxpy);
+
+        var breedDiv = document.createElement('div');
+        breedDiv.className = breedInfo.name;
+        pxpy.appendChild(breedDiv);
+
+        var breedImg = document.createElement('img');
+        breedImg.src = Object.hasOwn(breedInfo, 'image') ? breedInfo.image.url : "";
+        breedDiv.appendChild(breedImg);
+
+        var breedHeader = document.createElement('h2');
+        breedHeader.textContent = breedInfo.name;
+        breedDiv.appendChild(breedHeader);
+
+        var breedcol_xs = document.createElement('div');
+        breedcol_xs.className = 'col-xs-1';
+        pxpy.appendChild(breedcol_xs);
+
+        var breedPara = document.createElement('p');
+        breedPara.className = 'card-text';
+        breedPara.textContent = breedInfo.description;
+        breedcol_xs.appendChild(breedPara);
+
+        var breedcol_xs = document.createElement('div');
+        breedcol_xs.className = 'col-xs-1';
+        pxpy.appendChild(breedcol_xs);
+
+        var breedTable = document.createElement('table');
+        breedTable.className = 'card-table';
+        breedTable.innerHTML = `
+    <tr>
+        <td>Weight</td>
+        <td>${breedInfo.weight.imperial} lbs</td>
+    </tr>
+    <tr>
+        <td>Origin</td>
+        <td>${breedInfo.origin}</td>
+    </tr>
+    <tr>
+        <td>Indoor</td>
+        <td>${breedInfo.indoor ? "Yes" : "No"}</td>
+    </tr>
+    <tr>
+        <td>Temperamant</td>
+        <td>${breedInfo.temperament}</td>
+    </tr>`
+        breedcol_xs.appendChild(breedTable);
+
+        var breedButton = document.createElement('a');
+        breedButton.className = 'btn';
+        breedButton.innerText = 'Read More';
+        if (Object.hasOwn(breedInfo, 'wikipedia_url'))
+            breedButton.onclick = () => { window.location.href = breedInfo.wikipedia_url }
+        breedcol_xs.appendChild(breedButton);
+
+        return newCard;
+    }
+
+    function getImgUrl(breedId) {
+        let imgUrl = '';
+        fetch(img_url + breedId, { headers: { 'x-api-key': api_key }})
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            imgUrl = data.url;
+        });
+        return imgUrl;
+    }
+</script>
 
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
