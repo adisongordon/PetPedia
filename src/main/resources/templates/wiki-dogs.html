@@ -54,6 +54,16 @@
         .btn:focus {
             outline: none;
         }
+
+        .parent {
+            width: 100px;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
     </style>
 
 </head>
@@ -109,7 +119,7 @@
 
 <script>
     const breeds_url = "https://api.thedogapi.com/v1/breeds";
-    const img_search_url = "https://api.thecatapi.com/v1/images/search?breed_ids=";
+    const img_url = "https://api.thecatapi.com/v1/images/";
     const api_key = "live_H4Ju1crGTZBGoy56AH0H9pACGoI4adjHB0jkJHvY8uuMWyOOBGpM940qClww1BQx";
     let breeds = [];
 
@@ -140,7 +150,7 @@
         pxpy.appendChild(breedDiv);
 
         var breedImg = document.createElement('img');
-        breedImg.src = getImgUrl(breedInfo.id);
+        breedImg.src = breedInfo.image.url;
         breedDiv.appendChild(breedImg);
 
         var breedHeader = document.createElement('h2');
@@ -155,10 +165,30 @@
         breedcol_xs.className = 'col-xs-1';
         pxpy.appendChild(breedcol_xs);
 
-        var breedPara = document.createElement('p');
-        breedPara.className = 'card-text';
-        breedPara.textContent = breedInfo.description;
-        breedcol_xs.appendChild(breedPara);
+        var breedTable = document.createElement('table');
+        breedTable.className = 'card-table';
+        breedTable.innerHTML = `
+    <tr>
+        <td>Weight</td>
+        <td>${breedInfo.weight.imperial} lbs</td>
+    </tr>
+    <tr>
+        <td>Height</td>
+        <td>${breedInfo.height.imperial} in.</td>
+    </tr>
+    <tr>
+        <td>Lifespan</td>
+        <td>${breedInfo.life_span}</td>
+    </tr>
+    <tr>
+        <td>Bred for</td>
+        <td>${breedInfo.bred_for}</td>
+    </tr>
+    <tr>
+        <td>Temperamant</td>
+        <td>${breedInfo.temperament}</td>
+    </tr>`
+        breedcol_xs.appendChild(breedTable);
 
         var breedButton = document.createElement('a');
         breedButton.className = 'btn';
