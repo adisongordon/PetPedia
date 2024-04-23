@@ -12,4 +12,9 @@ public class SheltersController {
     public String Shelters() {
         return "shelters";
     }
+
+    @GetMapping("/shelters/RuffHaven")
+    public String getRuff() {
+        return "shelters-RuffHaven";
+    }
 }
