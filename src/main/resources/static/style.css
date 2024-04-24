@@ -1,8 +1,3 @@
-/* Customize navbar style */
-.navbar-brand img {
-    height: 40px; /* Adjust height of the logo */
-}
-
 header {
     height: 200px; /* Fixed header height */
     padding: 100px;
