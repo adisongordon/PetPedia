@@ -85,6 +85,7 @@
     const img_url = "https://api.thecatapi.com/v1/images/";
     const api_key = "live_gV2BbWyIAPtYEYqvvtjBmrpOvt5ntQ56pY79wDhD5EDG0MaoBzZantEmIUvp9ir5";
     let breeds = [];
+    var breedInfos = [];
 
     fetch(breeds_url, { headers: { 'x-api-key': api_key }})
     .then((response) => {
@@ -96,7 +97,8 @@
 
         for (let i = 0; i < breeds.length; i++) {
             //if (!breeds[i].image) continue;
-            document.getElementsByClassName('container mt-5')[0].appendChild(makeCard(breeds[i]));
+            breedInfos.push(makeCard(breeds[i]));
+            document.getElementsByClassName('container mt-5')[0].appendChild(breedInfos[breedInfos.length-1]);
         }
     });
 

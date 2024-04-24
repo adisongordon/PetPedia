@@ -74,6 +74,9 @@
 
 <div class="container mt-5">
     <h1 style="text-align: center; color:#226b32">Wiki</h1>
+    <label for="breedSearch">Narrow Results</label>
+    <input type="text" id="breedSearch" name="breedSearch" oninput="searchBreeds(this.value)">
+    <input type="button" id="clearSearchBtn" name="clearSearchBtn" onclick="clearSearch()" value="Clear">
 </div>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -83,6 +86,7 @@
     const img_url = "https://api.thecatapi.com/v1/images/";
     const api_key = "live_H4Ju1crGTZBGoy56AH0H9pACGoI4adjHB0jkJHvY8uuMWyOOBGpM940qClww1BQx";
     let breeds = [];
+    var breedCards = [];
 
     fetch(breeds_url, {headers: {'x-api-key': api_key}})
         .then((response) => {
@@ -92,11 +96,12 @@
             data = data.filter(img => img.image?.url != null);
             breeds = data;
 
-            for (let i = 0; i < breeds.length; i++) {
-                if (!breeds[i].image) continue;
-                document.getElementsByClassName('container mt-5')[0].appendChild(makeCard(breeds[i]));
-            }
-        });
+        for (let i = 0; i < breeds.length; i++) {
+            if (!breeds[i].image) continue;
+            breedCards.push(makeCard(breeds[i]));
+            document.getElementsByClassName('container mt-5')[0].appendChild(breedCards[breedCards.length-1]);
+        }
+    });
 
     function makeCard(breedInfo) {
         var newCard = document.createElement('div');
@@ -170,6 +175,24 @@
                 imgUrl = data.url;
             });
         return imgUrl;
+    }
+
+    function searchBreeds(query) {
+        for (let i = 0; i < breedCards.length; i++) {
+            if (!breedCards[i].firstChild.firstChild.innerText
+                .toLowerCase()
+                .includes(query.toLowerCase())) {
+                breedCards[i].style.display = 'none'
+            }
+            else {
+                breedCards[i].style.display = ''
+            }
+        }
+    }
+
+    function clearSearch() {
+        document.getElementById("breedSearch").value = '';
+        searchBreeds('');
     }
 </script>
 
