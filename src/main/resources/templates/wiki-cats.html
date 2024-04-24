@@ -72,6 +72,9 @@
 
 <div class="container mt-5">
     <h1 style="text-align: center; color:#124e7e">Cats</h1>
+    <label for="breedSearch">Narrow Results</label>
+    <input type="text" id="breedSearch" name="breedSearch" oninput="searchBreeds(this.value)">
+    <input type="button" id="clearSearchBtn" name="clearSearchBtn" onclick="clearSearch()" value="Clear">
     <br>
     <div class="mr-2" style="margin-right:10px;">
     </div>
@@ -85,7 +88,7 @@
     const img_url = "https://api.thecatapi.com/v1/images/";
     const api_key = "live_gV2BbWyIAPtYEYqvvtjBmrpOvt5ntQ56pY79wDhD5EDG0MaoBzZantEmIUvp9ir5";
     let breeds = [];
-    var breedInfos = [];
+    var breedCards = [];
 
     fetch(breeds_url, { headers: { 'x-api-key': api_key }})
     .then((response) => {
@@ -97,8 +100,8 @@
 
         for (let i = 0; i < breeds.length; i++) {
             //if (!breeds[i].image) continue;
-            breedInfos.push(makeCard(breeds[i]));
-            document.getElementsByClassName('container mt-5')[0].appendChild(breedInfos[breedInfos.length-1]);
+            breedCards.push(makeCard(breeds[i]));
+            document.getElementsByClassName('container mt-5')[0].appendChild(breedCards[breedCards.length-1]);
         }
     });
 
@@ -177,6 +180,24 @@
             imgUrl = data.url;
         });
         return imgUrl;
+    }
+
+    function searchBreeds(query) {
+        for (let i = 0; i < breedCards.length; i++) {
+            if (!breedCards[i].firstChild.firstChild.innerText
+                .toLowerCase()
+                .includes(query.toLowerCase())) {
+                breedCards[i].style.display = 'none'
+            }
+            else {
+                breedCards[i].style.display = ''
+            }
+        }
+    }
+
+    function clearSearch() {
+        document.getElementById("breedSearch").value = '';
+        searchBreeds('');
     }
 </script>
 
