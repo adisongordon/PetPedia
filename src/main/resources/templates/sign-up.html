@@ -8,6 +8,24 @@
 </head>
 <body style="background-color:rgba(232,234,231)">
 <div th:replace="~{fragments/header :: header}"></div>
+<div class="container">
+    <form action="/sign-up" method="post">
+        <h2 class="form-signup-heading">Please sign up</h2>
+        <p>Example: user / password</p>
+        <p>
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus/>
+        </p>
+        <p>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required autofocus/>
+        </p>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button><br/>
+<!--        Username: <input type="text" name="userName"> <br>-->
+<!--        Password: <input type="password" name="userPassword"> <br>-->
+<!--        <input type="submit" value="Sing-up">-->
+    </form>
+</div>
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
