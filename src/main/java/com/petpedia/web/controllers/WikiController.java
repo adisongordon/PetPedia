@@ -1,4 +1,4 @@
-package com.petpedia.web.wiki;
+package com.petpedia.web.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

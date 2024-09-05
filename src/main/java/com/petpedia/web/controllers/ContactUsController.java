@@ -1,9 +1,9 @@
-package com.petpedia.web.faqs;
+package com.petpedia.web.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 
 @Controller
 @RequiredArgsConstructor
-public class FrequentlyAskedQuestionsController {
+public class ContactUsController {
 }
