@@ -13,7 +13,7 @@
         .carousel-container {
             /* Adjust width and margin as needed */
             width: 100%;
-            height: 600px;
+            height: 700px;
             margin: 0 auto;
             padding: 10px;
         }
@@ -59,11 +59,9 @@
             overflow: scroll;
         }
 
-        .carousel-control-next-icon,
-        .carousel-control-prev-icon {
-            width: 2vw;
-            height: 2vw;
-            background-color: lightgray;
+        .custom-size {
+            width: 60%;
+            height: auto;
         }
     </style>
 </head>
@@ -71,33 +69,35 @@
 <body style="background-color:rgba(255,255,255,0)">
 <div th:replace="~{fragments/header :: header}"></div>
 <div class="content-container">
+    <hr class="hr-line">
     <div class="carousel-container">
         <div id="home-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="/images/orange-kitty.jpg" class="center" alt="Orange Kitty">
+                    <img src="/images/logo.png" class="center" alt="Logo">
                     <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
-                        <p class="fs-3 mt-5" style="color:#46eab1"><strong>Do something good for your pets and your
-                            local
-                            community</strong></p>
+                        <p class="fs-3 mt-5" style="color:#57c9ec"><strong>Pet Care Made Easy</strong></p>
                     </div>
                 </div>
-                <!-- Additional carousel items -->
-                <!-- ... -->
+                <!-- Additional carousel item -->
+                <div class="carousel-item">
+                    <img src="/images/ruffhaven.png" class="center" alt="Ruff Haven Logo">
+                    <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
+                        <p class="fs-3 mt-5" style="color:#57c9ec"><strong>Check Out Our Local Organizations! </strong></p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/petsupplies.jpg" class="center custom-size" alt="Pet Supplies">
+                    <div class="carousel-caption bottom-0 mt" style="background-color:rgba(0,0,0,0.6); padding: 20px;">
+                        <p class="fs-3 mt-5" style="color:#57c9ec"><strong>Find All Your Pet Needs Close By When Using Our Map </strong></p>
+                    </div>
+                </div>
             </div>
 
-            <!-- Navigation buttons -->
-            <button class="carousel-control-prev" role="button" data-bs-target="#home-carousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" role="button" data-bs-target="#home-carousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+
         </div>
     </div>
-
+    <hr class="hr-line">
     <h2><strong> Welcome to Pet-Pedia! </strong></h2>
     <p>Pet-Pedia serves as a comprehensive resource for current and prospective pet owners, addressing the myriad
         questions surrounding their pets’ needs and well-being. In contrast to the ambiguity of generalized online
@@ -119,4 +119,3 @@
 
 </body>
 </html>
-
