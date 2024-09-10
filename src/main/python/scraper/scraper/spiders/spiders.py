@@ -4,6 +4,7 @@ import json
 import scrapy
 from scrapy.http import Response
 
+
 class BreedPageSpider(scrapy.Spider):
     name = 'breed_pages'
     start_urls = ['https://www.petguide.com/breeds/rabbit',
@@ -17,11 +18,15 @@ class BreedPageSpider(scrapy.Spider):
             yield {
                 'url': item.get()
             }
+        next_page = response.css('.sl-next-page').attrib['href']
+        if next_page is not None:
+            next_page = response.urljoin(next_page)
+            yield scrapy.Request(next_page, callback=self.parse)
 
 
 class TableInfoSpider(scrapy.Spider):
     name = 'table_info'
-    start_urls = [f"https://www.petguide.com{item['url']}" for item in json.load(open('pages.json'))] #['https://www.petguide.com/breeds/rabbit/florida-white-rabbit/']
+    start_urls = ['https://www.petguide.com/breeds/rabbit/florida-white-rabbit/'] #[f"https://www.petguide.com{item['url']}" for item in json.load(open('pages.json'))]scrapy
 
     def parse(self, response):
         for item in response.css('.item'):
