@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Pet Pedia</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="/js/signup.js" defer></script>
@@ -15,7 +15,7 @@
 <div class="container">
     <section>
 
-        <form action="/req/login" method="post">
+        <form th::action="@{/req/login}" method="post">
             <h1>Login</h1>
             <div class="dialog-row">
                 <label th:if="${param.error}" th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}" class="text-center redText"></label>
@@ -33,7 +33,9 @@
             <div class="register">
                 <p><a href="#">Forget Password ?</a></p>
             </div>
-            <button>Log in</button>
+            <div class="form-actions">
+                <button type="submit">Log in</button>
+            </div>
             <div class="register">
                 <p>Don't have a account ?<a href="/req/signup"> Register!!</a></p>
             </div>

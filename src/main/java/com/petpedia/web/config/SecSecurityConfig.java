@@ -49,9 +49,18 @@ public class SecSecurityConfig {
                     httpForm.defaultSuccessUrl("/home");
                 })
                 .authorizeHttpRequests(registry -> {
-                    registry.requestMatchers("/req/sign-up", "/css/**", "/js/**", "/fragments/**", "/home").permitAll();
+                    registry.requestMatchers("/css/**", "/js/**", "/fragments/**", "/images/**").permitAll();
+                    registry.requestMatchers("/").permitAll();
+                    registry.requestMatchers("/wiki").permitAll();
+                    registry.requestMatchers("/quiz").permitAll();
+                    registry.requestMatchers("/forum").permitAll();
+                    registry.requestMatchers("/shelters").permitAll();
+                    registry.requestMatchers("/shelters/RuffHaven").permitAll();
+                    registry.requestMatchers("/map").permitAll();
+                    registry.requestMatchers("/req/signup").permitAll();
                     registry.anyRequest().authenticated();
                 })
+                .logout(config -> config.logoutSuccessUrl("/"))
                 .build();
 
 //        http
