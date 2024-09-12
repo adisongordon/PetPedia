@@ -63,24 +63,5 @@ public class SecSecurityConfig {
                 .logout(config -> config.logoutSuccessUrl("/"))
                 .build();
 
-//        http
-//                .csrf(AbstractHttpConfigurer::disable)
-//                .authorizeHttpRequests(registry -> {
-//                    registry.requestMatchers("/home", "/login/**", "/sign-up/**").permitAll();
-//                    registry.requestMatchers("/admin/**").hasRole(Role.ADMIN.name());
-//                    registry.requestMatchers("/user/**").hasRole(Role.USER.name());
-//                    registry.anyRequest().authenticated();
-//                })
-//                .formLogin(httpSecurityFormLoginConfigurer -> {
-//                    httpSecurityFormLoginConfigurer
-//                            .loginPage("/login")
-//                            .defaultSuccessUrl("/", true)
-//                            .permitAll();
-//                })
-//                .logout((logoutConfig) ->
-//                        logoutConfig.logoutSuccessUrl("/")
-//                )
-//                .userDetailsService(usersDetailsService);
-//        return http.getOrBuild();
     }
 }
