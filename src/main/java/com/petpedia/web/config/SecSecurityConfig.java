@@ -49,29 +49,19 @@ public class SecSecurityConfig {
                     httpForm.defaultSuccessUrl("/home");
                 })
                 .authorizeHttpRequests(registry -> {
-                    registry.requestMatchers("/req/sign-up", "/css/**", "/js/**", "/fragments/**", "/home").permitAll();
+                    registry.requestMatchers("/css/**", "/js/**", "/fragments/**", "/images/**").permitAll();
+                    registry.requestMatchers("/").permitAll();
+                    registry.requestMatchers("/wiki").permitAll();
+                    registry.requestMatchers("/quiz").permitAll();
+                    registry.requestMatchers("/forum").permitAll();
+                    registry.requestMatchers("/shelters").permitAll();
+                    registry.requestMatchers("/shelters/RuffHaven").permitAll();
+                    registry.requestMatchers("/map").permitAll();
+                    registry.requestMatchers("/req/signup").permitAll();
                     registry.anyRequest().authenticated();
                 })
+                .logout(config -> config.logoutSuccessUrl("/"))
                 .build();
 
-//        http
-//                .csrf(AbstractHttpConfigurer::disable)
-//                .authorizeHttpRequests(registry -> {
-//                    registry.requestMatchers("/home", "/login/**", "/sign-up/**").permitAll();
-//                    registry.requestMatchers("/admin/**").hasRole(Role.ADMIN.name());
-//                    registry.requestMatchers("/user/**").hasRole(Role.USER.name());
-//                    registry.anyRequest().authenticated();
-//                })
-//                .formLogin(httpSecurityFormLoginConfigurer -> {
-//                    httpSecurityFormLoginConfigurer
-//                            .loginPage("/login")
-//                            .defaultSuccessUrl("/", true)
-//                            .permitAll();
-//                })
-//                .logout((logoutConfig) ->
-//                        logoutConfig.logoutSuccessUrl("/")
-//                )
-//                .userDetailsService(usersDetailsService);
-//        return http.getOrBuild();
     }
 }
