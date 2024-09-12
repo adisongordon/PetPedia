@@ -31,4 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
-/.directory
+/src/main/python/scraper/scraper/pages.json
