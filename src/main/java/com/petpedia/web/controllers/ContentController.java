@@ -57,5 +57,16 @@ public class ContentController {
     @GetMapping("/profile")
     public String profile() {return "profile";}
 
+    // TODO add API endpoints for retrieving wiki data from database
+    /*
+    e.g.
+    @GetMapping("/api/wiki-data")
+    public Map<String, String> wikiData() {
+        Map<String, String> m = new HashMap<String, String>();
+        // retrieve database info and add to hash map
+        return m;
+    }
+     */
+
 
 }
