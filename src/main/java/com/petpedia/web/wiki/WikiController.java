@@ -22,4 +22,7 @@ public class WikiController {
     public String getCats() {
         return "wiki-cats";
     }
+
+    @GetMapping("/wiki/others")
+    public String getOthers() { return "wiki-others"; }
 }

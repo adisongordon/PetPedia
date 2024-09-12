@@ -87,7 +87,7 @@
     let breeds = [];
     var breedCards = [];
 
-    fetch('../../python/')
+    fetch('/table.json')
     .then((response) => {
         return response.json();
     })
@@ -115,7 +115,7 @@
         pxpy.appendChild(breedDiv);
 
         var breedImg = document.createElement('img');
-        breedImg.src = Object.hasOwn(breedInfo, 'image') ? breedInfo.image.url : "";
+        breedImg.src = Object.hasOwn(breedInfo, 'img-src') ? breedInfo['img-src'] : "";
         breedImg.setAttribute('id', 'breedImg');
         breedDiv.appendChild(breedImg);
 
@@ -127,56 +127,26 @@
         breedcol_xs.className = 'col-xs-1';
         pxpy.appendChild(breedcol_xs);
 
-        var breedPara = document.createElement('p');
-        breedPara.className = 'card-text';
-        breedPara.textContent = breedInfo.description;
-        breedcol_xs.appendChild(breedPara);
-
         var breedcol_xs = document.createElement('div');
         breedcol_xs.className = 'col-xs-1';
         pxpy.appendChild(breedcol_xs);
 
         var breedTable = document.createElement('table');
         breedTable.className = 'card-table';
-        breedTable.innerHTML = `
-    <tr>
-        <td>Weight</td>
-        <td>${breedInfo.weight.imperial} lbs</td>
-    </tr>
-    <tr>
-        <td>Origin</td>
-        <td>${breedInfo.origin}</td>
-    </tr>
-    <tr>
-        <td>Indoor</td>
-        <td>${breedInfo.indoor ? "Yes" : "No"}</td>
-    </tr>
-    <tr>
-        <td>Temperamant</td>
-        <td>${breedInfo.temperament}</td>
-    </tr>`
+
+        var tableText = '';
+
+        let keys = Object.keys(breedInfo);
+        for (let i = 0; i < keys.length; i++) {
+            if (keys[i] !== 'name' && keys[i] !== 'img-src') {
+                tableText += '<tr><td>' + keys[i] + '</td><td>' + breedInfo[keys[i]] + '</td></tr>'
+            }
+        }
+
+        breedTable.innerHTML = tableText;
         breedcol_xs.appendChild(breedTable);
 
-        var breedButton = document.createElement('a');
-        breedButton.className = 'btn';
-        breedButton.innerText = 'Read More';
-        if (Object.hasOwn(breedInfo, 'wikipedia_url'))
-            breedButton.onclick = () => { window.location.href = breedInfo.wikipedia_url }
-        breedcol_xs.appendChild(breedButton);
-
         return newCard;
-    }
-
-    function getImgUrl(breedId) {
-        let imgUrl = '';
-        fetch(img_url + breedId, { headers: { 'x-api-key': api_key }})
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            imgUrl = data.url;
-        });
-        return imgUrl;
     }
 
     function searchBreeds(query) {
