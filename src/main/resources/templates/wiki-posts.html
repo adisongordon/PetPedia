@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Pedia</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/style.css}"/>
+  <style>
+    .article {
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    .article img {
+      max-width: 100px;
+      margin-right: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1 class="mt-4 mb-4">Articles</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="article" onclick="window.location='article1.html';">
+        <img src="article1.jpg" alt="Dogs">
+        <h2>Article 1</h2>
+        <p>Description of Article 1 goes here...</p>
+      </div>
+      <div class="article" onclick="window.location='article2.html';">
+        <img src="article2.jpg" alt="Cats">
+        <h2>Article 2</h2>
+        <p>Description of Article 2 goes here...</p>
+      </div>
+
+     /* Add more articles here */
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
