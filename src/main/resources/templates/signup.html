@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pet Pedia</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="/js/signup.js" defer></script>
+</head>
+<style>
+    section {
+        position: relative;
+        max-width: 500px;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 3rem;
+    }
+
+    h1{
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .inputbox {
+        position: relative;
+        margin: 20px 0;
+        max-width: 550px;
+        border-bottom: 2px solid black;
+        margin-bottom: 2rem;
+    }
+
+    .inputbox input {
+        width: 100%;
+        height: 40px;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        padding: 0 35px 0 5px;
+        color: black;
+    }
+
+    .inputbox label{
+        margin-left: 0.3rem;
+    }
+    .inputbox ion-icon {
+        position: absolute;
+        right: 8px;
+        color: black;
+        font-size: 1.2rem;
+        top: 40px;
+    }
+
+</style>
+<body style="background-color:rgba(232,234,231)">
+<div th:replace="~{fragments/header :: header}"></div>
+<div class="container">
+    <section class="center mt-5">
+        <form action="/req/signup" method="post">
+            <h1>Sign Up</h1>
+            <div class="inputbox">
+                <ion-icon name="person-outline"></ion-icon>
+                <label>Username</label>
+                <input type="text" id= "username" name="username" placeholder="Username" required>
+            </div>
+            <div class="inputbox">
+                <ion-icon name="mail-outline"></ion-icon>
+                <label>Email</label>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+
+            <div class="inputbox">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+                <label>Password</label>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="inputbox">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+                <label>Confirm Password</label>
+                <input type="password" id="passwordcon" name="passwordcon" placeholder="Confirm Password" required>
+            </div>
+            <button id= "submit" type="submit" class="btn btn-primary">Sign Up</button>
+            <div class="register mt-2">
+                <p>Already have an account? <a href="/req/login">Log In</a></p>
+            </div>
+        </form>
+    </section>
+</div>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
+<script>
+    const submitButttom = document.getElementById("submit");
+    submitButttom.addEventListener('click',()=>{
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('passwordcon').value;
+        const email = document.getElementById('email').value;
+        const data ={
+            username,
+            email,
+            password
+        }
+
+        if(password == confirmPassword){
+            const jsonData = JSON.stringify(data);
+            fetch('/req/signup', {
+                method: 'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
+            })
+                .then(response =>{
+                    //alert('succesfull');
+                    //if(response.status == 200){
+                    //alert('succesfull');
+                    //xs}
+                })
+        }
+
+    })
+
+
+</script>

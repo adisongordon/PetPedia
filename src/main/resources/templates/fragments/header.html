@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Pet Pedia</title>
@@ -17,7 +17,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item" th:class="${activePage == 'home'} ? 'nav-item active' : 'nav-item'">
                     <a class="nav-link" th:href="@{/}">Home</a>
                 </li>
@@ -36,10 +36,22 @@
                 <li class="nav-item" th:class="${activePage == 'map'} ? 'nav-item active' : 'nav-item'">
                     <a class="nav-link" th:href="@{/map}">Map</a>
                 </li>
+            </ul>
+            <ul class="navbar-nav" sec:authorize="!isAuthenticated()">
                 <li class="nav-item" th:class="${activePage == 'login'} ? 'nav-item active' : 'nav-item'">
                     <a class="nav-link" th:href="@{/sign-in}">Login</a>
                 </li>
             </ul>
+            <ul class="navbar-nav p-2" sec:authorize="isAuthenticated()">
+                <li class="nav-item" th:class="${activePage == 'profile'} ? 'nav-item active' : 'nav-item'">
+                    <a class="nav-link" th:href="@{/profile}">Profile</a>
+                </li>
+            </ul>
+            <form sec:authorize="isAuthenticated()" method="post" action="/logout">
+                <!--                <input type="hidden" th:name="${_csrf.parameterName}"-->
+                <!--                       th:value="${_csrf.token}" />-->
+                <button type="submit" class="btn-danger">Logout</button>
+            </form>
         </div>
     </div>
 </nav>

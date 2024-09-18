@@ -1,13 +1,100 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pet Pedia</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
+
 <div th:replace="~{fragments/header :: header}"></div>
-<div th:replace="~{fragments/footer :: footer}"></div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action">Saved Articles</a>
+                <a href="#" class="list-group-item list-group-item-action">Liked Posts</a>
+                <a href="#" class="list-group-item list-group-item-action">Commented Posts</a>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <h2>Your Account</h2>
+            <div class="profile-container mr-3">
+                <img src="/images/profile-picture.png" alt="Profile Picture">
+            </div>
+            <div>
+                <p>Logged in as <strong><span sec:authentication="name"></span></strong></p>
+            </div>
+            <hr>
+            <!-- Pets Section -->
+            <div class="mt-4">
+                <h3>Your Pets</h3>
+
+                <div class="card mb-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="/images/orange-kitty.jpg" class="card-img" alt="Pet 1">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Gorge </h5>
+                                <p class="card-text">Breed: Cat</p>
+                                <p class="card-text">Age: 9 years old</p>
+                                <p class="card-text">Favorite Activity: Sleeping</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pet 2 -->
+                <div class="card mb-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="/images/boxer.png" class="card-img" alt="Pet 2">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Sammy</h5>
+                                <p class="card-text">Breed: Boxer</p>
+                                <p class="card-text">Age: 5 years old</p>
+                                <p class="card-text">Favorite Activity: Playing Fetch</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        /* Profile picture container */
+        .profile-container {
+            width: 80px; /* Set the width for the container */
+            height: 80px; /* Set the height for the container */
+            overflow: hidden; /* Ensure the image stays contained */
+            border-radius: 50%; /* Make the container circular */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #ddd; /* Optional border */
+        }
+
+        /* Optional styles for better image control */
+        .profile-container img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+
 </body>
 </html>

@@ -18,3 +18,10 @@ body {
     padding-top: 20px;
     width: 80%;
 }
+
+footer {
+    margin-top: 150px;
+    width: 100%;
+    color: #efefef;
+    background: #333;
+}
