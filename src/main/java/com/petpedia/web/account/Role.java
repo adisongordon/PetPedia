@@ -1,2 +1,4 @@
-package com.petpedia.web;public enum Role {
+package com.petpedia.web.account;
+
+public enum Role {
 }
