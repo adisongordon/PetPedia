@@ -9,6 +9,7 @@ import java.util.Map;
 public class WikiData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String breed;
     private String species;
     private String imgUrl;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,16 +17,14 @@
         }
 
         .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
             transition: 0.3s;
             border-radius: 5px;
             width: 600px;
         }
-
         .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
         }
-
         .btn {
             background-color: #0367a6;
             background-image: linear-gradient(90deg, #0367a6 0%, #008997 74%);
@@ -73,31 +71,32 @@
 <div th:replace="~{fragments/header :: header}"></div>
 
 <div class="container mt-5">
-    <h1 style="text-align: center; color:#124e7e">Dogs</h1>
+    <h1 style="text-align: center; color:#124e7e">Other Pets</h1>
     <label for="breedSearch">Narrow Results</label>
     <input type="text" id="breedSearch" name="breedSearch" oninput="searchBreeds(this.value)">
     <input type="button" id="clearSearchBtn" name="clearSearchBtn" onclick="clearSearch()" value="Clear">
+    <br>
+    <div class="mr-2" style="margin-right:10px;">
+    </div>
+
 </div>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
-    const breeds_url = "https://api.thedogapi.com/v1/breeds";
-    const img_url = "https://api.thecatapi.com/v1/images/";
-    const api_key = "live_H4Ju1crGTZBGoy56AH0H9pACGoI4adjHB0jkJHvY8uuMWyOOBGpM940qClww1BQx";
     let breeds = [];
     var breedCards = [];
 
-    fetch(breeds_url, {headers: {'x-api-key': api_key}})
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            data = data.filter(img => img.image?.url != null);
-            breeds = data;
+    fetch('/table.json')
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        //data = data.filter(img=> img.image?.url!=null);
+        breeds = data;
 
         for (let i = 0; i < breeds.length; i++) {
-            if (!breeds[i].image) continue;
+            //if (!breeds[i].image) continue;
             breedCards.push(makeCard(breeds[i]));
             document.getElementsByClassName('container mt-5')[0].appendChild(breedCards[breedCards.length-1]);
         }
@@ -116,7 +115,7 @@
         pxpy.appendChild(breedDiv);
 
         var breedImg = document.createElement('img');
-        breedImg.src = breedInfo.image.url;
+        breedImg.src = Object.hasOwn(breedInfo, 'img-src') ? breedInfo['img-src'] : "";
         breedImg.setAttribute('id', 'breedImg');
         breedDiv.appendChild(breedImg);
 
@@ -124,9 +123,9 @@
         breedHeader.textContent = breedInfo.name;
         breedDiv.appendChild(breedHeader);
 
-        var breedEmptyPara = document.createElement('p');
-        breedEmptyPara.innerText = '';
-        breedDiv.appendChild(breedEmptyPara);
+        var breedcol_xs = document.createElement('div');
+        breedcol_xs.className = 'col-xs-1';
+        pxpy.appendChild(breedcol_xs);
 
         var breedcol_xs = document.createElement('div');
         breedcol_xs.className = 'col-xs-1';
@@ -134,47 +133,20 @@
 
         var breedTable = document.createElement('table');
         breedTable.className = 'card-table';
-        breedTable.innerHTML = `
-    <tr>
-        <td>Weight</td>
-        <td>${breedInfo.weight.imperial} lbs</td>
-    </tr>
-    <tr>
-        <td>Height</td>
-        <td>${breedInfo.height.imperial} in.</td>
-    </tr>
-    <tr>
-        <td>Lifespan</td>
-        <td>${breedInfo.life_span}</td>
-    </tr>
-    <tr>
-        <td>Bred for</td>
-        <td>${breedInfo.bred_for}</td>
-    </tr>
-    <tr>
-        <td>Temperamant</td>
-        <td>${breedInfo.temperament}</td>
-    </tr>`
+
+        var tableText = '';
+
+        let keys = Object.keys(breedInfo);
+        for (let i = 0; i < keys.length; i++) {
+            if (keys[i] !== 'name' && keys[i] !== 'img-src') {
+                tableText += '<tr><td>' + keys[i] + '</td><td>' + breedInfo[keys[i]] + '</td></tr>'
+            }
+        }
+
+        breedTable.innerHTML = tableText;
         breedcol_xs.appendChild(breedTable);
 
-        var breedButton = document.createElement('a');
-        breedButton.className = 'btn';
-        breedButton.innerText = 'Read More';
-        breedcol_xs.appendChild(breedButton);
-
         return newCard;
-    }
-
-    function getImgUrl(breedId) {
-        let imgUrl = '';
-        fetch(img_search_url + breedId, {headers: {'x-api-key': api_key}})
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                imgUrl = data.url;
-            });
-        return imgUrl;
     }
 
     function searchBreeds(query) {
@@ -195,7 +167,6 @@
         searchBreeds('');
     }
 </script>
-
 
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>

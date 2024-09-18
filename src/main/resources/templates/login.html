@@ -52,36 +52,35 @@
         font-size: 1.2rem;
         top: 12px;
     }
-
 </style>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
 
-    <section class="center mt-5">
-        <form th::action="@{/req/login}" method="post">
-            <h1>Login</h1>
-            <div class="dialog-row">
-                <label th:if="${param.error}" th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}" class="text-center redText"></label>
-            </div>
-            <div class="inputbox my-2">
-                <ion-icon name="person-circle-outline"></ion-icon>
-                <input name="username" id="username"type="name" placeholder="Username" autofocus required>
-            </div>
-            <div class="inputbox my-2">
-                <ion-icon name="lock-closed-outline"></ion-icon>
-                <input name="password" type="password" id="password" placeholder="Password" required>
-            </div>
-            <div class="register my-2">
-                <p><a href="#">Forget Password ?</a></p>
-            </div>
-            <div class="form-actions my-2">
-                <button type="submit" class="btn btn-primary">Log in</button>
-            </div>
-            <div class="register my-2">
-                <p>Don't have an account?<a href="/req/signup"> Register</a></p>
-            </div>
-        </form>
-    </section>
+<section class="center mt-5">
+    <form th::action="@{/req/login}" method="post">
+        <h1>Login</h1>
+        <div class="dialog-row">
+            <label th:if="${param.error}" th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}" class="text-center redText"></label>
+        </div>
+        <div class="inputbox my-2">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <input name="username" id="username"type="name" placeholder="Username" autofocus required>
+        </div>
+        <div class="inputbox my-2">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <input name="password" type="password" id="password" placeholder="Password" required>
+        </div>
+        <div class="register my-2">
+            <p><a href="#">Forget Password ?</a></p>
+        </div>
+        <div class="form-actions my-2">
+            <button type="submit" class="btn btn-primary">Log in</button>
+        </div>
+        <div class="register my-2">
+            <p>Don't have an account?<a href="/req/signup"> Register</a></p>
+        </div>
+    </form>
+</section>
 
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>

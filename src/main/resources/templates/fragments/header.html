@@ -39,7 +39,7 @@
             </ul>
             <ul class="navbar-nav" sec:authorize="!isAuthenticated()">
                 <li class="nav-item" th:class="${activePage == 'login'} ? 'nav-item active' : 'nav-item'">
-                    <a class="nav-link" th:href="@{/req/login}">Login</a>
+                    <a class="nav-link" th:href="@{/sign-in}">Login</a>
                 </li>
             </ul>
             <ul class="navbar-nav p-2" sec:authorize="isAuthenticated()">
