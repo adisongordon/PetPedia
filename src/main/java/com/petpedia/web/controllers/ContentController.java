@@ -1,12 +1,18 @@
 package com.petpedia.web.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import com.petpedia.web.services.UserService;
 
 @Controller
 @RequiredArgsConstructor
 public class ContentController {
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/")
     public String Index() {
@@ -56,6 +62,18 @@ public class ContentController {
 
     @GetMapping("/profile")
     public String profile() {return "profile";}
+
+    /*
+    @RequestMapping("/create-post")
+    public String createPost() {return "create-post";}
+     */
+
+    @GetMapping("/create-post")
+    public String showCreatePostPage(Model model) {
+        String username = userService.getFirstUsername();
+        model.addAttribute("username", username);
+        return "create-post"; // This should map to your create-post.html page
+    }
 
     // TODO add API endpoints for retrieving wiki data from database
     /*
