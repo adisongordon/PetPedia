@@ -2,11 +2,19 @@ spring:
   application:
     name: Pet-Pedia
 
+# Currently can't connect to AWS database
   datasource:
-    url: jdbc:mysql://pet-pedia-database.cz0w4iki8hg5.us-east-2.rds.amazonaws.com:3306/pet-pedia-database
+    url: jdbc:mysql://pet-pedia-database.cz0w4iki8hg5.us-east-2.rds.amazonaws.com:3306/petpedia
     username: admin
     password: fecbaf-beZviz-5korjo
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+   # Uncomment for local database access
+   # driver-class-name: com.mysql.cj.jdbc.Driver
+   # url: jdbc:mysql://127.0.0.1:3306/petpedia
+   # username: root
+   # password: root
+
 
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
