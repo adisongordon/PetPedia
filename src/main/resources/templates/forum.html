@@ -9,7 +9,24 @@
 <body style="background-color:rgba(232,234,231)">
 <div th:replace="~{fragments/header :: header}"></div>
 
-<img src="/images/demo-forum.png" alt="" class="center">
+<div class="container">
+    <h1>Forum</h1>
+
+    <!-- Button to Create Post Page -->
+    <div class="create-post-button">
+        <a href="create-post" class="button">Create a Post</a>
+    </div>
+
+    <!-- Posts Section -->
+    <div class="posts-section">
+        <h2>Posts</h2>
+        <div id="posts-container">
+            <!-- Posts will be dynamically added here -->
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
 
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
