@@ -55,18 +55,15 @@ public class ContentController {
     }
     @GetMapping("/quiz")
     public String quiz() {return "quiz";}
+    /*
     @GetMapping("/forum")
     public String forum() {return "forum";}
+     */
     @GetMapping("/map")
     public String map() {return "map";}
 
     @GetMapping("/profile")
     public String profile() {return "profile";}
-
-    /*
-    @RequestMapping("/create-post")
-    public String createPost() {return "create-post";}
-     */
 
     @GetMapping("/create-post")
     public String showCreatePostPage(Model model) {

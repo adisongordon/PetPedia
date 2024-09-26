@@ -21,9 +21,16 @@
     <div class="posts-section">
         <h2>Posts</h2>
         <div id="posts-container">
-            <!-- Posts will be dynamically added here -->
+            <div th:each="post : ${posts}">
+                <div class="post">
+                    <h3 th:text="${post.title}"></h3>
+                    <p th:text="${post.content}"></p>
+                    <small th:text="${post.username}"></small>
+                </div>
+            </div>
         </div>
     </div>
+
 </div>
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
