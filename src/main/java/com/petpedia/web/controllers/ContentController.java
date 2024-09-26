@@ -6,13 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.petpedia.web.services.UserService;
+import com.petpedia.web.model.UsersDetailsService;
 
 @Controller
 @RequiredArgsConstructor
 public class ContentController {
     @Autowired
-    private UserService userService;
+    private UsersDetailsService usersDetailsService;
 
     @GetMapping("/")
     public String Index() {
@@ -70,7 +70,7 @@ public class ContentController {
 
     @GetMapping("/create-post")
     public String showCreatePostPage(Model model) {
-        String username = userService.getFirstUsername();
+        String username = usersDetailsService.getFirstUsername();
         model.addAttribute("username", username);
         return "create-post"; // This should map to your create-post.html page
     }

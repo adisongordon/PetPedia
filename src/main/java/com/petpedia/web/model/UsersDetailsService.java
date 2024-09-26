@@ -30,4 +30,9 @@ public class UsersDetailsService implements UserDetailsService {
         }
     }
 
+    public String getFirstUsername() {
+        Users user = repository.findFirstByOrderByIdAsc();
+        return user != null ? user.getUsername() : "Guest";
+    }
+
 }
