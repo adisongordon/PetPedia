@@ -2,7 +2,6 @@ spring:
   application:
     name: Pet-Pedia
 
-# Currently can't connect to AWS database
   datasource:
     url: jdbc:mysql://pet-pedia-database.cz0w4iki8hg5.us-east-2.rds.amazonaws.com:3306/petpedia
     username: admin
