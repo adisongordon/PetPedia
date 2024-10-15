@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 
+  <!--
+    TODO:
+        Pull css into style.css
+    -->
   <style>
     body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     body {
@@ -130,6 +134,10 @@
         </div>
       </div>
 
+       <!--
+        TODO:
+            Show pet-specific posts, not all posts
+        -->
       <div th:each="post : ${posts}" class="post-card">
         <div class="post-header">
           <!--<img th:src="${users.imageUrl != null ? users.imageUrl : '/images/default-avatar.png'}"

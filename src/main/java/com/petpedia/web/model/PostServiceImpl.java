@@ -14,6 +14,10 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
 
+    /*
+        TODO:
+            Create queries to get posts specific to species of pet
+     */
     @Override
     public List<Post> getAllPosts() {
         return postRepository.findAll();
@@ -42,6 +46,11 @@ public class PostServiceImpl implements PostService {
         postRepository.deleteById(id);
     }
 
+    /*
+        TODO:
+            Enable the ability to like posts,
+            currently this feature is not working
+     */
     @Override
     public Post likePost(Long id) {
         Post post = postRepository.findById(id)
@@ -50,4 +59,10 @@ public class PostServiceImpl implements PostService {
         post.setLikes(post.getLikes() + 1);
         return postRepository.save(post);
     }
+
+    /*
+        TODO:
+            Enable the ability to comment on posts,
+            currently this feature is not working
+     */
 }

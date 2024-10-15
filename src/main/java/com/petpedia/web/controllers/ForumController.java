@@ -61,6 +61,11 @@ public class ForumController {
         return "forum";
     }
 
+    /*
+        TODO:
+            Enable the ability to like posts,
+            currently this feature is not working
+     */
     @PostMapping("/like/{id}")
     public String likePost(@PathVariable Long id) {
         postService.likePost(id);
