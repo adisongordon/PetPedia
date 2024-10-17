@@ -51,6 +51,7 @@ public class SecSecurityConfig {
                 .authorizeHttpRequests(registry -> {
                     registry.requestMatchers("/css/**", "/js/**", "/fragments/**", "/images/**").permitAll();
                     registry.requestMatchers("/").permitAll();
+                    registry.requestMatchers("/home").permitAll();
                     registry.requestMatchers("/wiki").permitAll();
                     registry.requestMatchers("/wiki/**").permitAll();
                     registry.requestMatchers("/quiz").permitAll();
@@ -62,7 +63,7 @@ public class SecSecurityConfig {
                     registry.requestMatchers("/req/signup").permitAll();
                     registry.anyRequest().authenticated();
                 })
-                .logout(config -> config.logoutSuccessUrl("/"))
+                .logout(config -> config.logoutSuccessUrl("/home"))
                 .build();
 
     }
