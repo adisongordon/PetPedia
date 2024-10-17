@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Setter
 @Getter
-@Entity(name = "wiki_data")
+@Entity(name = "pets")
 public class Pet {
 
     @Id
@@ -21,7 +21,7 @@ public class Pet {
     private String breed;
     @Column
     private String imgUrl;
-    @Column(length = 10000)
+    @Column(length = 4000)
     private String description;
     @Column(length = 4000)
     private String tableInfo;
