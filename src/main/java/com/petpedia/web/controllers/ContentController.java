@@ -4,8 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import com.petpedia.web.model.UsersDetailsService;
 
 @Controller
@@ -30,8 +29,16 @@ public class ContentController {
     public String signUp() {return "signup";}
 
     @GetMapping("/wiki")
-    public String Wiki() {
-        return "wiki";
+    public String Wiki() { return "wiki"; }
+
+    @GetMapping("/wiki/birds")
+    public String getBirds() {
+        return "wiki-birds";
+    }
+
+    @GetMapping("/wiki/cats")
+    public String getCats() {
+        return "wiki-cats";
     }
 
     @GetMapping("/wiki/dogs")
@@ -39,9 +46,24 @@ public class ContentController {
         return "wiki-dogs";
     }
 
-    @GetMapping("/wiki/cats")
-    public String getCats() {
-        return "wiki-cats";
+    @GetMapping("/wiki/fish")
+    public String getFish() {
+        return "wiki-fish";
+    }
+
+    @GetMapping("/wiki/horses")
+    public String getHorses() {
+        return "wiki-horses";
+    }
+
+    @GetMapping("/wiki/rabbits")
+    public String getRabbits() {
+        return "wiki-rabbits";
+    }
+
+    @GetMapping("/wiki/turtles")
+    public String getTurtles() {
+        return "wiki-turtles";
     }
 
     @GetMapping("/shelters")
@@ -71,17 +93,5 @@ public class ContentController {
         model.addAttribute("username", username);
         return "create-post"; // This should map to your create-post.html page
     }
-
-    // TODO add API endpoints for retrieving wiki data from database
-    /*
-    e.g.
-    @GetMapping("/api/wiki-data")
-    public Map<String, String> wikiData() {
-        Map<String, String> m = new HashMap<String, String>();
-        // retrieve database info and add to hash map
-        return m;
-    }
-     */
-
 
 }
