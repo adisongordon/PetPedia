@@ -32,3 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 /.directory
+/lib/selenium-api-4.3.0.jar
