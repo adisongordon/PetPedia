@@ -35,4 +35,10 @@ public class Users {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    /*
+        TODO:
+            Enable the ability to allow users to customize their profile,
+            add a profile image, add their pets, etc.
+     */
 }

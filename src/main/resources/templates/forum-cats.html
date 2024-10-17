@@ -127,18 +127,16 @@
 
         <div class="posts-container">
             <div class="title-and-button">
-                <h1>Forum</h1>
+                <h1>Cats</h1>
 
                 <div class="create-post-button">
                     <a href="create-post" class="btn">Create a Post</a>
                 </div>
             </div>
 
-
             <!--
-                TODO:
-                    Highlight popular posts (those with most engagement),
-                    instead of all of the posts
+            TODO:
+                Show pet-specific posts, not all posts
             -->
             <div th:each="post : ${posts}" class="post-card">
                 <div class="post-header">

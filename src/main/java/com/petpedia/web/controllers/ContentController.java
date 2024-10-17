@@ -89,7 +89,7 @@ public class ContentController {
 
     @GetMapping("/create-post")
     public String showCreatePostPage(Model model) {
-        String username = usersDetailsService.getFirstUsername();
+        String username = usersDetailsService.getLoggedInUsername();
         model.addAttribute("username", username);
         return "create-post"; // This should map to your create-post.html page
     }
