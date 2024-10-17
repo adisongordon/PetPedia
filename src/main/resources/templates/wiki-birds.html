@@ -73,7 +73,7 @@
 <div th:replace="~{fragments/header :: header}"></div>
 
 <div class="container mt-5">
-    <h1 style="text-align: center; color:#124e7e">Dogs</h1>
+    <h1 style="text-align: center; color:#124e7e">Birds</h1>
     <label for="breedSearch">Narrow Results</label>
     <input type="text" id="breedSearch" name="breedSearch" oninput="searchBreeds(this.value)">
     <input type="button" id="clearSearchBtn" name="clearSearchBtn" onclick="clearSearch()" value="Clear">
@@ -83,7 +83,7 @@
 <script src="/js/wiki-api.js"></script>
 
 <script>
-    var cards = getApiData("dog");
+    var cards = getApiData("bird");
     console.log(cards);
 </script>
 
