@@ -56,8 +56,9 @@ public class SecSecurityConfig {
                     registry.requestMatchers("/wiki/**").permitAll();
                     registry.requestMatchers("/quiz").permitAll();
                     registry.requestMatchers("/forum").permitAll();
+                    registry.requestMatchers("/forum/**").permitAll();
                     registry.requestMatchers("/shelters").permitAll();
-                    registry.requestMatchers("/shelters/RuffHaven").permitAll();
+                    registry.requestMatchers("/shelters/**").permitAll();
                     registry.requestMatchers("/map").permitAll();
                     registry.requestMatchers("/api/**").permitAll();
                     registry.requestMatchers("/req/signup").permitAll();

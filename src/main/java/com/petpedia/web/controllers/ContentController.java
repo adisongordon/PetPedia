@@ -77,10 +77,7 @@ public class ContentController {
     }
     @GetMapping("/quiz")
     public String quiz() {return "quiz";}
-    /*
-    @GetMapping("/forum")
-    public String forum() {return "forum";}
-     */
+
     @GetMapping("/map")
     public String map() {return "map";}
 
