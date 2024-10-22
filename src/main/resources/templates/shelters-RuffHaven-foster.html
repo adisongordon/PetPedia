@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fostering with Ruff Haven</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #649438;
+            margin-bottom: 20px;
+        }
+
+        .blurb {
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        a.button {
+            display: inline-block;
+            background-color: #84c41c;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        a.button:hover {
+            background-color: #cee89a;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<div class="container">
+    <h1>Become a Foster Sitter!</h1>
+    <div class="blurb">
+        <p>Do you love cats or dogs and want to help reunite pets with their families? Are you over 18 and living in the Salt Lake City area? If you're willing to foster an animal for up to 90 days, you can join our Foster Sitter program!</p>
+        <p>Unlike traditional foster care where you house a homeless pet until they’re adopted, becoming a Foster Sitter with Ruff Haven means temporarily caring for a pet whose owner is going through a short-term hardship. It’s like being a hybrid between a foster parent and a pet-sitter! Pets thrive in a home environment, and by providing a safe space, you're not only reducing stress for the animal but also giving their owner peace of mind.</p>
+        <p>We provide detailed information about each pet’s behavior and personality, ensuring we match you with an animal that fits your lifestyle—whether you have other pets, children, or a busy schedule. Fostering is a great option if you’re not ready for the long-term commitment of adopting but still want to make a meaningful impact in the lives of pets and their owners in your community.</p>
+
+        <a class="button" href="https://www.shelterluv.com/matchme/foster/RHCS/Dog" target="_blank">Apply to Foster a Pet</a>
+    </div>
+</div>
+
+<div class="footer" th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

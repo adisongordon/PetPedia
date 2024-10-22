@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Volunteer with Ruff Haven</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #649438;
+            margin-bottom: 20px;
+        }
+
+        .blurb {
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        a.button {
+            display: inline-block;
+            background-color: #84c41c;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        a.button:hover {
+            background-color: #cee89a;
+        }
+
+        ul {
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<div class="container">
+    <h1>Volunteer at Ruff Haven!</h1>
+    <div class="blurb">
+        <p>Volunteering at Ruff Haven is a rewarding way to make a difference for pets and their families in need. Whether you’re a Cat Room Volunteer, a Dog Walking Volunteer, or a Delivery Driver for our Pet Pantry, there are many ways to get involved and support our mission.</p>
+
+        <p><strong>Basic requirements for volunteers:</strong></p>
+        <ul>
+            <li>You must be at least 18 years old.</li>
+            <li>Have a working email and Internet access to sign up for shifts.</li>
+            <li>Be able to purchase a $10 volunteer t-shirt (waived if needed) and wear it during each shift.</li>
+            <li>Commit to at least one 2-hour shift per month for a minimum of six months.</li>
+        </ul>
+
+        <p>By volunteering, you’re helping provide comfort and care for pets during challenging times and contributing to a community that values compassion and support.</p>
+
+        <a class="button" href="https://app.betterimpact.com/Application?OrganizationGuid=79c7aae8-a390-4602-aa54-8f543848b24f&ApplicationFormNumber=1" target="_blank">Apply to Volunteer</a>
+    </div>
+</div>
+
+<div class="footer" th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

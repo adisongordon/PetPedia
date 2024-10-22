@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donate to Ruff Haven</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    h1 {
+      color: #649438;
+      margin-bottom: 20px;
+    }
+
+    .blurb {
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    a.button {
+      display: inline-block;
+      background-color: #84c41c;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    a.button:hover {
+      background-color: #cee89a;
+    }
+  </style>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<div class="container">
+  <h1>Support Ruff Haven with a Donation!</h1>
+  <div class="blurb">
+    <p>Every dollar makes a difference in helping pets stay safe while their families get back on their feet. Just $30 covers the cost of one day of sheltering, $210 provides a week, and $900 supports a full month of care for a pet in need.</p>
+    <p>Don’t worry if you can’t donate money—there are plenty of other ways to help! Our most urgently needed items include collars, leashes, muzzles, blankets, protein paste, and litter box scoops. Your generosity, whether through donations or supplies, helps keep pets comfortable and cared for until they can be reunited with their families.</p>
+
+    <a class="button" href="https://www.ruffhaven.org/donate" target="_blank">Donate Now</a>
+  </div>
+</div>
+
+<div class="footer" th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

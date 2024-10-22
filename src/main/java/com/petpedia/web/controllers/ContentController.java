@@ -75,6 +75,22 @@ public class ContentController {
     public String getRuff() {
         return "shelters-RuffHaven";
     }
+
+    @GetMapping("/shelters/RuffHaven/foster")
+    public String getFoster() {
+        return "shelters-RuffHaven-foster";
+    }
+
+    @GetMapping("/shelters/RuffHaven/donate")
+    public String getDonate() {
+        return "shelters-RuffHaven-donate";
+    }
+
+    @GetMapping("/shelters/RuffHaven/volunteer")
+    public String getVolunteer() {
+        return "shelters-RuffHaven-volunteer";
+    }
+
     @GetMapping("/quiz")
     public String quiz() {return "quiz";}
 
