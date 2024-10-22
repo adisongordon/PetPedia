@@ -12,24 +12,6 @@
             height: 40px; /* Adjust height of the logo */
         }
 
-        .dropdown {
-          position: relative;
-          display: inline-block;
-        }
-
-        .button {
-          position: relative;
-        }
-
-        .dropdown-content {
-          display: none;
-          position: absolute;
-          background-color: #f9f9f9;
-          min-width: 160px;
-          box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-          z-index: 1;
-        }
-
         .dropdown-content a {
           color: black;
           padding: 12px 16px;
@@ -41,47 +23,75 @@
           background-color: #f1f1f1;
         }
 
-        .dropdown:hover .dropdown-content {
-          display: block;
+        .text-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px 20px 10px 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .search-box {
-          margin-top: 10px;
+        .text-container p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 15px;
         }
 
-        .content-container {
-            padding: 20px;
-            overflow: scroll;
-            align-content: center;
+        .text-container p strong {
+            color: #0066cc;
+            font-weight: bold;
         }
 
+        .map-container {
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
 
     </style>
 </head>
-<body style="background-color:rgba(232,234,231)">
+<body>
 <div th:replace="~{fragments/header :: header}"></div>
-<div class="content-container">
-    <p>Our interactive map helps both current and prospective pet owners. Simply enter your location to find nearby pet supply stores or, if you're looking to adopt, explore local shelters and adoption agencies in your area.</p>
-    <label for="dropdown">I am a:</label>
-    <select id="dropdown" onchange="reqTypeChanged(this)">
-        <option value="Current Pet Owner">Current Pet Owner</option>
-        <option value="Prospective Pet Owner">Prospective Pet Owner</option>
-    </select>
-
-    <div class="search-box">
-        <input id="location-box" type="text" onchange="locationChanged()" placeholder="Location...">
+<div class="container">
+    <div class="text-container">
+        <p>Our interactive map is designed to cater to both current and prospective pet owners. Simply choose your category to find what you need.</p>
+        <p><strong>Current Pet Owners:</strong> You can locate nearby pet supply stores.</p>
+        <p><strong>Prospective Pet Owners:</strong> You can discover local shelters and adoption agencies.</p>
+        <p>Enter your location or use the 'Get Location' feature to instantly find pet services in your area.</p>
     </div>
 
-    <button type="button" name="get-location-btn" onclick="getLocation()">Get Location</button>
 
-    <iframe
-            id="map"
-            width="90%"
-            height="600"
-            referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg&q=pet+supplies+Salt+Lake+City"
-            allowfullscreen>
-    </iframe>
+    <div class="form-group">
+        <label for="dropdown" class="form-label">I am a:</label>
+        <select id="dropdown" class="form-control" onchange="reqTypeChanged(this)">
+            <option value="Current Pet Owner">Current Pet Owner</option>
+            <option value="Prospective Pet Owner">Prospective Pet Owner</option>
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <label for="location-box" class="form-label">Enter your location:</label>
+        <input id="location-box" type="text" class="form-control" onchange="locationChanged()" placeholder="Location (city or ZIP code)">
+    </div>
+
+    <button type="button" class="btn btn-primary" name="get-location-btn" onclick="getLocation()">Use Current Location</button>
+
+
+
+    <div class="map-container">
+        <iframe
+                id="map"
+                width="100%"
+                height="600"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg&q=pet+supplies+Salt+Lake+City"
+                allowfullscreen>
+        </iframe>
+    </div>
 
     <script>
         var reqURL = "https://www.google.com/maps/embed/v1/search?key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg&q=";
