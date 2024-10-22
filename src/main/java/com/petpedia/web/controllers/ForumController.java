@@ -1,18 +1,20 @@
 package com.petpedia.web.controllers;
 
-import com.petpedia.web.model.Post;
-import com.petpedia.web.model.PostRepository;
-import com.petpedia.web.model.PostService;
-import com.petpedia.web.model.UsersDetailsService;
+import com.petpedia.web.model.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+@Log4j2
 @Controller
 @RequiredArgsConstructor
 public class ForumController {
@@ -23,7 +25,6 @@ public class ForumController {
     private PostRepository postRepository;
 
     private final PostService postService;
-
 
     @GetMapping("/forum")
     public String forum(Model model) {
@@ -46,9 +47,8 @@ public class ForumController {
         post.setContent(content);
 
         if (image != null && !image.isEmpty()) {
-            String imageUrl = "/images/" + image.getOriginalFilename();
+            String imageUrl = "/images/" + image.hashCode();
             post.setImageUrl(imageUrl);
-            // TODO: Save the image to the filesystem or cloud storage.
         }
 
         postRepository.save(post);
