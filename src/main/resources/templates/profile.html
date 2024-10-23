@@ -6,142 +6,194 @@
     <title>Pet Pedia - Profile</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
-</head>
-<body>
-
-<div th:replace="~{fragments/header :: header}"></div>
-
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-3">
-            <!--
-                TODO: Wire up and link the saved articles, liked posts, and commented posts
-            -->
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action">Saved Articles</a>
-                <a href="#" class="list-group-item list-group-item-action">Liked Posts</a>
-                <a href="#" class="list-group-item list-group-item-action">Commented Posts</a>
-            </div>
-        </div>
-
-        <div class="col-md-9">
-            <h2>Your Account</h2>
-            <div class="profile-container mr-3">
-                <!--
-                    TODO: Allow for users to change their profile picture
-                <img src="/images/default-avatar.png" alt="Profile Picture">
-                -->
-                <img id="profileImage" src="/images/profile-picture.png" alt="Profile Picture">
-            </div>
-
-            <button class="btn btn-secondary mt-2" onclick="document.getElementById('profilePictureInput').click()">Change Profile Picture</button>
-            <input type="file" id="profilePictureInput" class="d-none" accept="image/*" onchange="previewProfilePicture(event)">
-
-            <div class="mt-3">
-                <label for="username">Username:</label>
-                <input type="text" id="username" class="form-control" value="Current Username">
-            </div>
-
-            <button class="btn btn-primary mt-3" onclick="saveProfile()">Save Changes</button>
-
-            <div>
-                <p>Logged in as <strong><span sec:authentication="name"></span></strong></p>
-            </div>
-            <hr>
-
-            <!-- Pets Section -->
-            <!--
-                TODO: Allow for users to add/edit/delete their pets from their profile
-            -->
-            <div class="mt-4">
-                <h3>Your Pets</h3>
-                <!-- Pet cards here -->
-
-                <!-- Add Pet button -->
-                <button class="btn btn-success mt-3" data-toggle="modal" data-target="#addPetModal">Add Pet</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <div th:replace="~{fragments/footer :: footer}"></div>
-
-    <!-- Add Pet Modal -->
-    <div class="modal fade" id="addPetModal" tabindex="-1" role="dialog" aria-labelledby="addPetModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addPetModalLabel">Add a New Pet</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="addPetForm">
-                        <div class="form-group">
-                            <label for="petName">Pet Name</label>
-                            <input type="text" class="form-control" id="petName" placeholder="Enter your pet's name">
-                        </div>
-                        <div class="form-group">
-                            <label for="petSpecies">Species</label>
-                            <input type="text" class="form-control" id="petSpecies" placeholder="Enter species (e.g., Dog, Cat)">
-                        </div>
-                        <div class="form-group">
-                            <label for="petAge">Age</label>
-                            <input type="number" class="form-control" id="petAge" placeholder="Enter your pet's age">
-                        </div>
-                        <div class="form-group">
-                            <label for="petHealth">Health Issues</label>
-                            <textarea class="form-control" id="petHealth" placeholder="Enter any health issues"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="petPicture">Pet Picture</label>
-                            <input type="file" class="form-control-file" id="petPicture" accept="image/*">
-                        </div>
-                        <button type="button" class="btn btn-primary" onclick="savePet()">Save Pet</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <style>
+        .aside {
+            position: absolute;
+            left: 300px;
+            top: 170px;
+            width: 200px;
+        }
+
         /* Profile picture container */
         .profile-container {
-            width: 80px;
-            height: 80px;
+            padding: 0;
+            width: 150px;
+            height: 150px;
             overflow: hidden;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             border: 2px solid #ddd;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .profile-container img {
             max-width: 100%;
             max-height: 100%;
         }
+
+
+        .profile-header h2 {
+            margin-left: 5px;
+        }
+
+        .profile-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .profile-header p {
+            margin-top: 3px;
+            font-size: 1.3rem;
+        }
+
+        .filebox .upload {
+            display: inline-block;
+            height: 40px;
+            padding: 0 10px;
+            vertical-align: middle;
+            border: 1px solid #ddd;
+            width: 60%;
+            color: #999999;
+        }
+
+        .filebox label {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #fff;
+            vertical-align: middle;
+            background-color: #999999;
+            cursor: pointer;
+            height: 40px;
+            margin-left: 10px;
+        }
+
+        .filebox input:disabled {
+            background-color: #fff;
+        }
     </style>
+</head>
+<body>
 
-    <script>
-        function savePet() {
-            var petName = document.getElementById('petName').value;
-            var petSpecies = document.getElementById('petSpecies').value;
-            var petAge = document.getElementById('petAge').value;
-            var petHealth = document.getElementById('petHealth').value;
-            var petPicture = document.getElementById('petPicture').files[0];
+<div th:replace="~{fragments/header :: header}"></div>
 
-            var reader = new FileReader();
-            reader.onload = function() {
-                var petList = document.querySelector('.mt-4'); // Select the Pets section
+<div class="row">
 
-                var newPetCard = `
+    <div class="list-group col-md-3 aside">
+        <a th:href="@{/profile-saved-articles}" class="list-group-item list-group-item-action">Saved Articles</a>
+        <a th:href="@{/profile-liked-posts}" class="list-group-item list-group-item-action">Liked Posts</a>
+        <a th:href="@{/profile-commented-posts}" class="list-group-item list-group-item-action">Commented Posts</a>
+    </div>
+
+
+    <div class="container">
+
+        <div class="profile-header">
+            <h2>My Profile</h2>
+            <p>Logged in as <strong><span sec:authentication="name"></span></strong></p>
+        </div>
+
+        <div class="profile-container mt-4 center">
+            <img id="profileImage" src="/images/profile-picture.png" alt="Profile Picture">
+        </div>
+
+        <div class="mt-4">
+            <p>Change Profile Picture</p>
+        </div>
+        <div class="row filebox ml-1">
+            <input class="upload" value="No file chosen" placeholder="No file chosen" disabled="disabled">
+            <label for="profilePicture">Upload</label>
+            <input type="file" class="d-none" id="profilePicture" accept="image/*" onchange="previewProfilePicture(event)">
+            <div class="col-md-3">
+                <button class="btn btn-primary btn-block" onclick="saveProfile()">
+                    Save Change
+                </button>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Pets Section -->
+        <!--
+            TODO: Allow for users to add/edit/delete their pets from their profile
+        -->
+        <div class="mt-4">
+            <h3>Your Pets</h3>
+            <!-- Pet cards here -->
+
+            <div class="pets-list">
+
+            </div>
+            <!-- Add Pet button -->
+            <button class="btn btn-success mt-3" data-toggle="modal" data-target="#addPetModal">Add Pet</button>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<!-- Add Pet Modal -->
+<div class="modal fade" id="addPetModal" tabindex="-1" role="dialog" aria-labelledby="addPetModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addPetModalLabel">Add a New Pet</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addPetForm">
+                    <div class="form-group">
+                        <label for="petName">Pet Name</label>
+                        <input type="text" class="form-control" id="petName" placeholder="Enter your pet's name">
+                    </div>
+                    <div class="form-group">
+                        <label for="petSpecies">Species</label>
+                        <input type="text" class="form-control" id="petSpecies"
+                               placeholder="Enter species (e.g., Dog, Cat)">
+                    </div>
+                    <div class="form-group">
+                        <label for="petAge">Age</label>
+                        <input type="number" class="form-control" id="petAge" placeholder="Enter your pet's age">
+                    </div>
+                    <div class="form-group">
+                        <label for="petHealth">Health Issues</label>
+                        <textarea class="form-control" id="petHealth" placeholder="Enter any health issues"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="petPicture">Pet Picture</label>
+                        <input type="file" class="form-control-file" id="petPicture" accept="image/*">
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="savePet()">Save Pet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function savePet() {
+        var petName = document.getElementById('petName').value;
+        var petSpecies = document.getElementById('petSpecies').value;
+        var petAge = document.getElementById('petAge').value;
+        var petHealth = document.getElementById('petHealth').value;
+        var petPicture = document.getElementById('petPicture').files[0];
+
+        var reader = new FileReader();
+        reader.onload = function () {
+            var petList = document.querySelector('.pets-list'); // Select the Pets section
+
+            var newPetCard = `
                     <div class="card mb-3">
                         <div class="row no-gutters">
                             <div class="col-md-4">
@@ -158,14 +210,32 @@
                         </div>
                     </div>`;
 
-                petList.insertAdjacentHTML('beforeend', newPetCard); // Add new pet to the Pets section
-            };
-            reader.readAsDataURL(petPicture); // Display the uploaded pet image
+            petList.insertAdjacentHTML('beforeend', newPetCard); // Add new pet to the Pets section
+        };
+        reader.readAsDataURL(petPicture); // Display the uploaded pet image
 
-            // Close the modal after saving
-            $('#addPetModal').modal('hide');
+        // Close the modal after saving
+        $('#addPetModal').modal('hide');
+    }
+
+    function previewProfilePicture(event) {
+        const profileImage = document.getElementById('profileImage');
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                profileImage.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
         }
-    </script>
-</div>
+    }
+
+    $("#profilePicture").on('change',function(){
+        var fileName = $("#profilePicture")[0].files[0].name;
+        $(".upload").val(fileName);
+    });
+
+</script>
 </body>
 </html>
