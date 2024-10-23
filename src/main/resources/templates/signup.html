@@ -15,23 +15,23 @@
         max-width: 500px;
         border: 2px solid rgba(255, 255, 255, 0.5);
         border-radius: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         padding: 2rem 3rem;
+        background-color: rgba(255,255,255,0.8);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        margin: 40px auto;
     }
 
     h1{
         text-align: center;
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
+        color: #333;
     }
 
     .inputbox {
         position: relative;
-        margin: 20px 0;
-        max-width: 550px;
-        border-bottom: 2px solid black;
         margin-bottom: 2rem;
+        padding-bottom: 5px;
+        border-bottom: 2px solid #ccc;
     }
 
     .inputbox input {
@@ -41,19 +41,56 @@
         border: none;
         outline: none;
         font-size: 1rem;
-        padding: 0 35px 0 5px;
-        color: black;
+        padding: 15px 35px 0 5px;
+        color: #333;
     }
 
-    .inputbox label{
-        margin-left: 0.3rem;
-    }
     .inputbox ion-icon {
         position: absolute;
         right: 8px;
-        color: black;
+        color: #666;
         font-size: 1.2rem;
-        top: 40px;
+        top: 12px;
+    }
+
+
+
+    .inputbox label {
+        font-size: 0.9rem;
+        position: absolute;
+        top: -18px;
+        left: 5px;
+        color: #666;
+        transition: 0.3s ease-in-out;
+    }
+
+    button.btn-primary {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        color: white;
+        font-size: 1.1rem;
+    }
+
+    .register {
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .register p a {
+        color: #0066cc;
+        text-decoration: none;
+    }
+
+    .register p a:hover {
+        text-decoration: underline;
+    }
+
+    .inputbox input:focus ~ label,
+    .inputbox input:not(:placeholder-shown) ~ label {
+        top: -18px;
+        font-size: 0.8rem;
+        color: #333;
     }
 
 </style>
@@ -85,8 +122,8 @@
                 <input type="password" id="passwordcon" name="passwordcon" placeholder="Confirm Password" required>
             </div>
             <button id= "submit" type="submit" class="btn btn-primary">Sign Up</button>
-            <div class="register mt-2">
-                <p>Already have an account? <a href="/req/login">Log In</a></p>
+            <div class="register">
+                <p>Already have an account? <a th:href="@{/req/login}">Log In</a></p>
             </div>
         </form>
     </section>

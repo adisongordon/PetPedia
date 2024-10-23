@@ -15,23 +15,23 @@
         max-width: 500px;
         border: 2px solid rgba(255, 255, 255, 0.5);
         border-radius: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         padding: 2rem 3rem;
+        background-color: rgba(255,255,255,0.8);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        margin: 40px auto;
     }
 
     h1{
         text-align: center;
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
+        color: #333;
     }
 
     .inputbox {
         position: relative;
-        margin: 20px 0;
-        max-width: 550px;
-        border-bottom: 2px solid black;
         margin-bottom: 2rem;
+        padding-bottom: 5px;
+        border-bottom: 2px solid #ccc;
     }
 
     .inputbox input {
@@ -41,21 +41,49 @@
         border: none;
         outline: none;
         font-size: 1rem;
-        padding: 0 35px 0 5px;
-        color: black;
+        padding: 15px 35px 0 5px;
+        color: #333;
+        line-height: 1.4;
     }
 
     .inputbox ion-icon {
         position: absolute;
         right: 8px;
-        color: black;
+        color: #666;
         font-size: 1.2rem;
         top: 12px;
+    }
+
+
+
+    button.btn-primary {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        color: white;
+        font-size: 1.1rem;
+    }
+
+    .register p a {
+        color: #0066cc;
+        text-decoration: none;
+    }
+
+    .register p a:hover {
+        text-decoration: underline;
+    }
+
+    .redText {
+        color: red;
+    }
+
+    .form-actions, .register {
+        margin-top: 1.5rem;
     }
 </style>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
-
+<div class="container">
 <section class="center mt-5">
     <form th::action="@{/req/login}" method="post">
         <h1>Login</h1>
@@ -70,18 +98,18 @@
             <ion-icon name="lock-closed-outline"></ion-icon>
             <input name="password" type="password" id="password" placeholder="Password" required>
         </div>
-        <div class="register my-2">
+        <div class="register">
             <p><a href="#">Forget Password ?</a></p>
         </div>
-        <div class="form-actions my-2">
+        <div class="form-actions">
             <button type="submit" class="btn btn-primary">Log in</button>
         </div>
-        <div class="register my-2">
+        <div class="register">
             <p>Don't have an account?<a href="/req/signup"> Register</a></p>
         </div>
     </form>
 </section>
-
+</div>
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
