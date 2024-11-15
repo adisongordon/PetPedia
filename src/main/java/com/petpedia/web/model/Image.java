@@ -1,12 +1,10 @@
 package com.petpedia.web.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,6 +19,7 @@ public class Image {
     private String name;
     @Column(name = "type")
     private String type;
+    @Lob
     @Column(unique = false, nullable = false, length = 10000)
     private byte[] image;
 

@@ -4,6 +4,10 @@ import com.petpedia.web.model.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Log4j2
 @Controller
@@ -23,6 +28,8 @@ public class ForumController {
     private UsersDetailsService usersDetailsService;
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private ImageRepository imageRepository;
 
     private final PostService postService;
 
@@ -33,13 +40,14 @@ public class ForumController {
         return "forum";
     }
 
+
     @PostMapping("/create-post")
     public String handleCreatePost(
             @RequestParam("username") String username,
             @RequestParam("title") String title,
             @RequestParam("content") String content,
             @RequestParam(value = "image", required = false) MultipartFile image,
-            Model model) {
+            Model model) throws IOException {
 
         Post post = new Post();
         post.setUsername(username);
@@ -47,13 +55,38 @@ public class ForumController {
         post.setContent(content);
 
         if (image != null && !image.isEmpty()) {
-            String imageUrl = "/images/" + image.hashCode();
+            String imageUrl = "/user_images/" + image.hashCode();
             post.setImageUrl(imageUrl);
+            imageRepository.save(Image.builder()
+                    .name(String.valueOf(image.hashCode()))
+                    .type(image.getContentType())
+                    .image(image.getBytes())
+                    .build());
         }
 
         postRepository.save(post);
         return "redirect:/forum";
     }
+
+    @GetMapping("/user_images/{image}")
+    public ResponseEntity<byte[]> getImage(@PathVariable String image) {
+        Optional<Image> optImg = imageRepository.findByName(image);
+        System.out.println(image);
+        if (optImg.isPresent()) {
+            Image img = optImg.get();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.valueOf(img.getType()));
+            return ResponseEntity
+                    .ok()
+                    .headers(headers)
+                    .body(img.getImage());
+        } else {
+            return ResponseEntity
+                    .status(404)
+                    .body(new byte[0]);
+        }
+    }
+
     @GetMapping
     public String forumHome(Model model) {
         List<Post> posts = postService.getAllPosts();
