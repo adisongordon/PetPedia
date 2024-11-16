@@ -152,6 +152,7 @@
                     </div>
                 </div>
                 <p th:text="${post.content}"></p>
+                <img th:src="${post.imageUrl}">
                 <div class="post-footer">
                     <div>
                         <form th:action="@{'/forum/' + ${post.id} + '/like'}" method="post">
