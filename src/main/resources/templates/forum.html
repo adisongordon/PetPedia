@@ -8,49 +8,38 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 
-    <!--
-    TODO:
-        Pull css into style.css
-    -->
     <style>
         body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         body {
             background-color: rgba(232, 234, 231);
         }
-
         .sidebar {
             width: 250px;
             float: left;
             margin-right: 20px;
             padding: 20px;
         }
-
         .category-title {
             font-weight: bold;
             margin-top: 20px;
         }
-
         .sidebar ul {
             list-style-type: none;
             padding: 0;
         }
-
         .sidebar ul li {
             margin: 5px 0;
         }
-
         .title-and-button {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
         }
-
         .posts-container {
             display: flex;
             flex-direction: column;
             width: 70%;
         }
-
         .post-card {
             background-color: white;
             width: 100%;
@@ -60,30 +49,25 @@
             margin-bottom: 50px;
             box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
         }
-
         .post-header {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
         }
-
         .post-header img {
             width: 50px;
             height: 50px;
             border-radius: 50%;
             margin-right: 10px;
         }
-
         .post-footer {
             display: flex;
             justify-content: space-between;
             margin-top: 10px;
         }
-
         .create-post-button {
             margin: 20px 0;
         }
-
         .interaction-buttons {
             background-color: #46eab1;
             background-image: linear-gradient(90deg, #0367a6 0%, #008997 74%);
@@ -100,7 +84,6 @@
             margin-right: auto;
             padding: 5px;
         }
-
     </style>
 </head>
 <body style="background-color:rgba(232,234,231)">
@@ -108,7 +91,6 @@
 
 <div class="container-fluid">
     <div class="row">
-
         <div class="sidebar">
             <input type="text" class="form-control" placeholder="Search Forums">
             <button class="btn btn-success btn-block mt-2">Search</button>
@@ -122,7 +104,6 @@
                 <li><a th:href="@{/forum/reptiles}">Reptiles</a></li>
                 <li><a th:href="@{/forum/amphibians}">Amphibians</a></li>
             </ul>
-
         </div>
 
         <div class="posts-container">
@@ -134,17 +115,8 @@
                 </div>
             </div>
 
-
-            <!--
-                TODO:
-                    Highlight popular posts (those with most engagement),
-                    instead of all of the posts
-            -->
             <div th:each="post : ${posts}" class="post-card">
                 <div class="post-header">
-                    <!--<img th:src="${users.imageUrl != null ? users.imageUrl : '/images/default-avatar.png'}"
-                         alt="User Profile Picture">
-                     -->
                     <img src="/images/default-avatar.png" alt="User Profile Picture">
                     <div>
                         <h3 th:text="${post.title}"></h3>
@@ -152,7 +124,9 @@
                     </div>
                 </div>
                 <p th:text="${post.content}"></p>
-                <img th:src="${post.imageUrl}">
+                <div th:if="${post.imageUrl != null}">
+                    <img th:src="${post.imageUrl}" alt="Post Image">
+                </div>
                 <div class="post-footer">
                     <div>
                         <form th:action="@{'/forum/' + ${post.id} + '/like'}" method="post">
@@ -160,9 +134,16 @@
                         </form>
 
                         <form th:action="@{'/forum/' + ${post.id} + '/comment'}" method="post">
-                            <input type="text" name="content" placeholder="Add a reply..." required>
-                            <button type="submit" class="interaction-buttons btn-outline-primary btn-sm">💬 Reply</button>
+                            <input type="text" name="username" placeholder="Username" required>
+                            <textarea name="content" placeholder="Add a comment" required></textarea>
+                            <button type="submit" class="interaction-buttons btn-outline-primary btn-sm">Comment</button>
                         </form>
+                    </div>
+                    <!-- Ensure comments are loaded and displayed properly -->
+                    <div th:if="${post.comments != null}">
+                        <div th:each="comment : ${post.comments}">
+                            <p><strong th:text="${comment.username}"></strong>: <span th:text="${comment.content}"></span></p>
+                        </div>
                     </div>
                     <small th:text="'Posted ' + ${post.timeAgo}"></small>
                 </div>

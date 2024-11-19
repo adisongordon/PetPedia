@@ -1,9 +1,9 @@
 package com.petpedia.web.model;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 import java.time.Duration;
+import java.util.List;
 
 @Entity
 public class Post {
@@ -18,17 +18,20 @@ public class Post {
     @Column(nullable = false, updatable = false)
     private LocalDateTime timestamp;
     private String timeAgo;
-
     @Column(nullable = false)
     private int likes = 0;
 
-    // Automatically set the timestamp when a post is created
+    // Relationship with Comment
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
+
     @PrePersist
     protected void onCreate() {
         timestamp = LocalDateTime.now();
     }
 
     // Getters and Setters
+
     public Long getId() {
         return id;
     }
@@ -61,9 +64,6 @@ public class Post {
         this.content = content;
     }
 
-
-    // Uncomment for image URL field
-
     public String getImageUrl() {
         return imageUrl;
     }
@@ -76,7 +76,7 @@ public class Post {
         return timestamp;
     }
 
-    public void setTimestamp() {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -88,9 +88,31 @@ public class Post {
         this.likes = likes;
     }
 
+    public void incrementLikes() {
+        this.likes++;
+    }
+
+    public void decrementLikes() {
+        if (this.likes > 0) {
+            this.likes--;
+        }
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+        comment.setPost(this);
+    }
+
     public String getTimeAgo() {
         Duration duration = Duration.between(timestamp, LocalDateTime.now());
-
         long minutes = duration.toMinutes();
         long hours = duration.toHours();
         long days = duration.toDays();
@@ -106,5 +128,3 @@ public class Post {
         }
     }
 }
-
-
