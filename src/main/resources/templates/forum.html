@@ -124,28 +124,29 @@
                     </div>
                 </div>
                 <p th:text="${post.content}"></p>
-                <div th:if="${post.imageUrl != null}">
-                    <img th:src="${post.imageUrl}" alt="Post Image">
+                <div th:if="${post.imageUrl}">
+                    <img th:src="@{${post.imageUrl}}" alt="Post Image">
+                </div>
+                <small th:text="'Posted ' + ${post.timeAgo}"></small>
+                <div th:each="comment : ${post.comments}">
+                    <hr>
+                    <div>
+                        <strong th:text="${comment.username}"></strong>
+                        <p th:text="${comment.content}"></p>
+                    </div>
                 </div>
                 <div class="post-footer">
                     <div>
                         <form th:action="@{'/forum/' + ${post.id} + '/like'}" method="post">
-                            <button type="submit" class="interaction-buttons btn-outline-danger btn-sm">❤️ <span th:text="${post.likes}"></span></button>
+                            <button type="submit" class="interaction-buttons btn-outline-danger btn-sm">❤️
+                                <span th:text="${post.likes}"></span></button>
                         </form>
 
                         <form th:action="@{'/forum/' + ${post.id} + '/comment'}" method="post">
-                            <input type="text" name="username" placeholder="Username" required>
                             <textarea name="content" placeholder="Add a comment" required></textarea>
                             <button type="submit" class="interaction-buttons btn-outline-primary btn-sm">Comment</button>
                         </form>
                     </div>
-                    <!-- Ensure comments are loaded and displayed properly -->
-                    <div th:if="${post.comments != null}">
-                        <div th:each="comment : ${post.comments}">
-                            <p><strong th:text="${comment.username}"></strong>: <span th:text="${comment.content}"></span></p>
-                        </div>
-                    </div>
-                    <small th:text="'Posted ' + ${post.timeAgo}"></small>
                 </div>
             </div>
         </div>

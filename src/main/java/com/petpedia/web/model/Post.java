@@ -3,6 +3,7 @@ package com.petpedia.web.model;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,7 +24,7 @@ public class Post {
 
     // Relationship with Comment
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
     @PrePersist
     protected void onCreate() {

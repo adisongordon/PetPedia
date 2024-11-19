@@ -6,12 +6,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
 
-    @Autowired
+
     private final PostRepository postRepository;
 
     @Autowired
@@ -75,14 +76,16 @@ public class PostServiceImpl implements PostService {
         }
     }
 
+    @Transactional
     @Override
     public void addComment(Long postId, Comment comment) {
-        Post post = getPostById(postId);
-        if (post != null) {
-            post.addComment(comment);
+        Optional<Post> postOptional = postRepository.findById(postId);
+        if (postOptional.isPresent()) {
+            Post post = postOptional.get();
             comment.setPost(post);
-            postRepository.save(post);
-            commentRepository.save(comment);
+            commentRepository.save(comment); // Save comment first
+            post.getComments().add(comment); // Then add it to the post's comment list
+            postRepository.save(post); // Finally, save the post to persist changes
         }
     }
 

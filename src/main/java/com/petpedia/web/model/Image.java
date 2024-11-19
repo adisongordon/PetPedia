@@ -9,6 +9,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "image")
 public class Image {
 
     @Id
@@ -20,7 +21,7 @@ public class Image {
     @Column(name = "type")
     private String type;
     @Lob
-    @Column(unique = false, nullable = false, length = 10000)
+    @Column(unique = false, nullable = false, length = 10000, columnDefinition = "LONGBLOB")
     private byte[] image;
 
 }
