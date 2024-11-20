@@ -135,7 +135,6 @@ public class PetPediaApplication {
                 if (optUrlPath.isPresent())
                     urlPath = (String) optUrlPath.get().get("url");
                 p.setInfoUrl("https://www.petguide.com" + urlPath);
-                System.out.println(p.getInfoUrl());
 
                 if (petDataRepository.existsByBreed(p.getBreed()))
                     continue;

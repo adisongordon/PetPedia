@@ -15,7 +15,7 @@ function getApiData(species)
         {
             //if (breeds[i].imgUrl == "") continue;
             breedCards.push(makeCard(breeds[i]))
-            document.getElementsByClassName('container mt-5')[0].appendChild(breedCards[breedCards.length -1]);
+            document.getElementsByClassName('container mt-5')[0].appendChild(breedCards[breedCards.length - 1]);
         }
     });
 

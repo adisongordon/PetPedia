@@ -81,28 +81,27 @@
     <button type="button" class="btn btn-primary" name="get-location-btn" onclick="getLocation()">Use Current Location</button>
 
 
-
     <div class="map-container">
         <iframe
                 id="map"
                 width="100%"
                 height="600"
                 referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg&q=pet+supplies+Salt+Lake+City"
+                src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg&q=pet+supplies+84148"
                 allowfullscreen>
         </iframe>
     </div>
 
     <script>
         var reqURL = "https://www.google.com/maps/embed/v1/search?key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg&q=";
-        var reqLocation = "Salt+Lake+City";
+        var reqLocation = "84148";
         var reqType = "pet+supplies+";
 
         function reqTypeChanged(selector) {
           if (selector.value == "Current Pet Owner")
             reqType = "pet+supplies+";
           else
-            reqType = "pet+rescue+";
+            reqType = "pets+for+sale+";
           requestChanged();
         }
 
@@ -112,19 +111,19 @@
         }
 
         function requestChanged() {
-          document.getElementById("map").src = reqURL + reqType + reqLocation;
+          document.getElementById("map").src = reqURL + reqType + "near+" + reqLocation;
         }
 
         function getLocation() {
           function editLocation(position) {
             console.log(position.coords);
-            fetch("https://maps.googleapis.com/maps/api/geocode/json?latlng="+position.coords.latitude+","+position.coords.longitude+"&key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg")
+            fetch("https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg&result_type=postal_code")
             .then((response) => response.json())
             .then((response) => {
               console.log(response);
               if (response.status == "OK"){
                 for (let i = 0; i < response.results[0].address_components.length; i++) {
-                    if (response.results[0].address_components[i].types.includes("locality")) {
+                    if (response.results[0].address_components[i].types.includes("postal_code")) {
                         reqLocation = response.results[0].address_components[i].long_name;
                         break;
                     }
@@ -136,8 +135,13 @@
               }
             });
           }
+
+          function locationError(e) {
+            console.error(e);
+          }
+
           if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(editLocation, null, {enableHighAccuracy: true})
+            navigator.geolocation.getCurrentPosition(editLocation, locationError, {enableHighAccuracy: true})
           }
           else {
             console.error("Geolocation not supported");
