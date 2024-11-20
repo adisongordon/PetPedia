@@ -107,4 +107,7 @@ public class ContentController {
         return "create-post"; // This should map to your create-post.html page
     }
 
+    @GetMapping("/profile-my-posts")
+    public String profileMyPosts() {return "profile-my-posts";}
+
 }
