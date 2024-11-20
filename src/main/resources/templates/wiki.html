@@ -58,6 +58,60 @@
         .btn:focus {
             outline: none;
         }
+
+        /* Chatbot Popup */
+        #chatbotIcon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px; /* Button size */
+            height: 60px;
+            background-color: #0078d4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        #chatbotIcon .chatbot-icon {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            border-radius: 50%; /* Make the popup circular */
+        }
+
+        #chatbotPopup {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 400px;
+            height: 600px;
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 1000;
+        }
+
+        #chatbotPopup iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        #chatbotOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
     </style>
 </head>
 <body style="background-color:rgba(232,234,231)">
@@ -160,8 +214,41 @@
     </div>
 </div>
 
+<!-- Chatbot Elements -->
+<div id="chatbotIcon">
+    <img th:src="@{/images/logo.png}" alt="Chat Icon" class="chatbot-icon">
+</div>
+
+<div id="chatbotOverlay"></div>
+<div id="chatbotPopup">
+    <iframe src="https://app.chatgptbuilder.io/webchat/?p=1420553&ref=1725999210020"></iframe>
+</div>
+
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <div th:replace="~{fragments/footer :: footer}"></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        // Chatbot Popup Logic
+        const chatbotIcon = document.getElementById('chatbotIcon');
+        const chatbotPopup = document.getElementById('chatbotPopup');
+        const chatbotOverlay = document.getElementById('chatbotOverlay');
+
+        chatbotIcon.onclick = () => {
+            chatbotPopup.style.display = 'block';
+            chatbotOverlay.style.display = 'block';
+        };
+
+        chatbotOverlay.onclick = () => {
+            chatbotPopup.style.display = 'none';
+            chatbotOverlay.style.display = 'none';
+        };
+    });
+</script>
 </body>
 </html>

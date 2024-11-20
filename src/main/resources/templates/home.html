@@ -8,7 +8,6 @@
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 
     <style>
-
         .carousel,
         .carousel-inner,
         .carousel-container {
@@ -23,7 +22,6 @@
             object-fit: cover;
             height: 600px
         }
-
 
         .carousel-caption {
             background-color: rgba(0, 0, 0, 0.6);
@@ -41,7 +39,6 @@
             margin: 0;
         }
 
-
         h2 {
             text-align: center;
             margin-top: 30px;
@@ -53,17 +50,69 @@
             padding: 20px;
         }
 
-
         .content-container {
             padding: 20px 0;
         }
-
 
         .hr-line {
             margin: 20px auto;
             width: 80%;
             border: none;
             border-top: 2px solid #ddd;
+        }
+
+        /* Chatbot Popup */
+        #chatbotIcon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px; /* Button size */
+            height: 60px; /* Button size */
+            background-color: #0078d4; /* Fallback background color */
+            border-radius: 50%; /* Make it circular */
+            display: flex;
+            align-items: center; /* Center the image vertically */
+            justify-content: center; /* Center the image horizontally */
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow for better visibility */
+            z-index: 1000; /* Ensure it stays on top */
+        }
+
+        #chatbotIcon .chatbot-icon {
+            width: 80%; /* Adjust size relative to the button */
+            height: 80%; /* Ensure it fits proportionally */
+            object-fit: contain; /* Preserve the image's aspect ratio */
+            border-radius: 50%; /* Make the image circular */
+        }
+
+        #chatbotPopup {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 400px;
+            height: 600px;
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 1000;
+        }
+
+        #chatbotPopup iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        #chatbotOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
         }
     </style>
 </head>
@@ -122,6 +171,16 @@
     </div>
 </div>
 
+<!-- Chatbot Elements -->
+<div id="chatbotIcon">
+    <img th:src="@{/images/logo.png}" alt="Chat Icon" class="chatbot-icon">
+</div>
+
+<div id="chatbotOverlay"></div>
+<div id="chatbotPopup">
+    <iframe src="https://app.chatgptbuilder.io/webchat/?p=1420553&ref=1725999210020"></iframe>
+</div>
+
 <div th:replace="~{fragments/footer :: footer}"></div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -133,6 +192,21 @@
             interval: 3000,  // Set a 3-second interval for carousel slides
             pause: 'hover'   // Pause on hover
         });
+
+        // Chatbot Popup Logic
+        const chatbotIcon = document.getElementById('chatbotIcon');
+        const chatbotPopup = document.getElementById('chatbotPopup');
+        const chatbotOverlay = document.getElementById('chatbotOverlay');
+
+        chatbotIcon.onclick = () => {
+            chatbotPopup.style.display = 'block';
+            chatbotOverlay.style.display = 'block';
+        };
+
+        chatbotOverlay.onclick = () => {
+            chatbotPopup.style.display = 'none';
+            chatbotOverlay.style.display = 'none';
+        };
     });
 </script>
 </body>
