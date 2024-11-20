@@ -4,53 +4,49 @@ import com.petpedia.web.model.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.MultipartBodyBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @Log4j2
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/forum")
 public class ForumController {
 
     @Autowired
     private UsersDetailsService usersDetailsService;
-    @Autowired
-    private PostRepository postRepository;
-    @Autowired
-    private ImageRepository imageRepository;
-
+    private final ImageRepository imageRepository;
+    private final PostRepository postRepository;
     private final PostService postService;
+    private final CommentRepository commentRepository;
 
-    @GetMapping("/forum")
+    @GetMapping
     public String forum(Model model) {
-        List<Post> posts = postRepository.findAll();
+        List<Post> posts = postService.getAllPostsWithComments();
+        posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));  // Sorting posts by timestamp in descending order
         model.addAttribute("posts", posts);
         return "forum";
     }
 
-
     @PostMapping("/create-post")
     public String handleCreatePost(
-            @RequestParam("username") String username,
             @RequestParam("title") String title,
             @RequestParam("content") String content,
             @RequestParam(value = "image", required = false) MultipartFile image,
             Model model) throws IOException {
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+
         Post post = new Post();
-        post.setUsername(username);
+        post.setUsername(currentUsername);
         post.setTitle(title);
         post.setContent(content);
 
@@ -64,50 +60,33 @@ public class ForumController {
                     .build());
         }
 
-        postRepository.save(post);
+        postService.createPost(post);
         return "redirect:/forum";
     }
 
-    @GetMapping("/user_images/{image}")
-    public ResponseEntity<byte[]> getImage(@PathVariable String image) {
-        Optional<Image> optImg = imageRepository.findByName(image);
-        System.out.println(image);
-        if (optImg.isPresent()) {
-            Image img = optImg.get();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.valueOf(img.getType()));
-            return ResponseEntity
-                    .ok()
-                    .headers(headers)
-                    .body(img.getImage());
-        } else {
-            return ResponseEntity
-                    .status(404)
-                    .body(new byte[0]);
-        }
-    }
-
-    @GetMapping
-    public String forumHome(Model model) {
-        List<Post> posts = postService.getAllPosts();
-        model.addAttribute("posts", posts);
-        return "forum";
-    }
-
-    /*
-        TODO:
-            Enable the ability to like posts,
-            currently this feature is not working
-     */
-    @PostMapping("/like/{id}")
+    @PostMapping("/{id}/like")
     public String likePost(@PathVariable Long id) {
         postService.likePost(id);
         return "redirect:/forum";  // Refresh the page after liking a post
     }
 
+    @PostMapping("/{id}/comment")
+    public String commentPost(@PathVariable Long id, @RequestParam String content) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+
+        Comment comment = new Comment();
+        comment.setUsername(currentUsername);
+        comment.setContent(content);
+
+        postService.addComment(id, comment);
+        return "redirect:/forum";
+    }
+
     @GetMapping("/{category}")
     public String forumByCategory(@PathVariable String category, Model model) {
         List<Post> posts = postService.getPostsByCategory(category);
+        posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));  // Sorting posts by timestamp in descending order
         model.addAttribute("posts", posts);
         return "forum";
     }
@@ -118,43 +97,48 @@ public class ForumController {
         return "redirect:/forum";
     }
 
-    @GetMapping("/forum/dogs")
+    @GetMapping("/dogs")
     public String getDogsForum(Model model) {
-        List<Post> posts = postRepository.findAll();
+        List<Post> posts = postService.getAllPostsWithComments();
+        posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-dogs";
     }
-    @GetMapping("/forum/cats")
+    @GetMapping("/cats")
     public String getCatsForum(Model model) {
-        List<Post> posts = postRepository.findAll();
+        List<Post> posts = postService.getAllPostsWithComments();
+        posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-cats";
     }
-    @GetMapping("/forum/birds")
+    @GetMapping("/birds")
     public String getBirdsForum(Model model) {
-        List<Post> posts = postRepository.findAll();
+        List<Post> posts = postService.getAllPostsWithComments();
+        posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-birds";
     }
-    @GetMapping("/forum/small-mammals")
+    @GetMapping("/small-mammals")
     public String getSmallMammalsForum(Model model) {
-        List<Post> posts = postRepository.findAll();
+        List<Post> posts = postService.getAllPostsWithComments();
+        posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-small-mammals";
     }
 
-    @GetMapping("/forum/reptiles")
+    @GetMapping("/reptiles")
     public String getReptilesForum(Model model) {
-        List<Post> posts = postRepository.findAll();
+        List<Post> posts = postService.getAllPostsWithComments();
+        posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-reptiles";
     }
 
-    @GetMapping("/forum/amphibians")
+    @GetMapping("/amphibians")
     public String getForumAmphibians(Model model) {
-        List<Post> posts = postRepository.findAll();
+        List<Post> posts = postService.getAllPostsWithComments();
+        posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-amphibians";
     }
 }
-

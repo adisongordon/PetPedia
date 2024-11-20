@@ -1,30 +1,24 @@
 package com.petpedia.web.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
-public class Post {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
-    private String title;
-    private String content;
-    private String imageUrl;
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime timestamp;
-    private String timeAgo;
-    @Column(nullable = false)
-    private int likes = 0;
 
-    // Relationship with Comment
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name="post_id", nullable=false)
+    private Post post;
+
+    private String username;
+    private String content;
+    private LocalDateTime timestamp;
 
     @PrePersist
     protected void onCreate() {
@@ -41,20 +35,20 @@ public class Post {
         this.id = id;
     }
 
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getContent() {
@@ -65,51 +59,12 @@ public class Post {
         this.content = content;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public int getLikes() {
-        return likes;
-    }
-
-    public void setLikes(int likes) {
-        this.likes = likes;
-    }
-
-    public void incrementLikes() {
-        this.likes++;
-    }
-
-    public void decrementLikes() {
-        if (this.likes > 0) {
-            this.likes--;
-        }
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public void addComment(Comment comment) {
-        comments.add(comment);
-        comment.setPost(this);
     }
 
     public String getTimeAgo() {

@@ -1,14 +1,17 @@
 package com.petpedia.web.model;
 
-import com.petpedia.web.model.Post;
 import java.util.List;
-import java.util.Optional;
 
 public interface PostService {
     List<Post> getAllPosts();
-    Optional<Post> getPostById(Long id);
+    Post getPostById(Long id);
     List<Post> getPostsByCategory(String category);
-    Post createPost(Post post);
+    void createPost(Post post);
     void deletePost(Long id);
-    Post likePost(Long id);
+    void likePost(Long id);
+    Post removeLike(Long id);
+    void addComment(Long postId, Comment comment);
+    void deleteComment(Long id, Long commentId);
+    List<Comment> getCommentsByPostId(Long id);
+    List<Post> getAllPostsWithComments();
 }
