@@ -1,12 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Pet Pedia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Pedia - Profile</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <style>
+        .aside {
+            position: absolute;
+            left: 300px;
+            top: 170px;
+            width: 200px;
+        }
+
+        /* Profile picture container */
+        .profile-container {
+            padding: 0;
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #ddd;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-container img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+
+        .profile-header h2 {
+            margin-left: 5px;
+        }
+
+        .profile-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .profile-header p {
+            margin-top: 3px;
+            font-size: 1.3rem;
+        }
+
+        .filebox .upload {
+            display: inline-block;
+            height: 40px;
+            padding: 0 10px;
+            vertical-align: middle;
+            border: 1px solid #ddd;
+            width: 60%;
+            color: #999999;
+        }
+
+        .filebox label {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #fff;
+            vertical-align: middle;
+            background-color: #999999;
+            cursor: pointer;
+            height: 40px;
+            margin-left: 10px;
+        }
+
+        .filebox input:disabled {
+            background-color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
+<div class="posts-container">
+    <div class="title-and-button">
+        <h1>My Posts</h1>
 
+    </div>
+
+    <div th:each="post : ${posts}" class="post-card">
+        <div class="post-header">
+            <img src="/images/default-avatar.png" alt="User Profile Picture">
+            <div class="post-info">
+                <h3 th:text="${post.title}"></h3>
+                <div class="post-meta">
+                    <small th:text="${post.username}"></small>
+                    <small th:text="${post.timestamp}"></small>
+                </div>
+            </div>
+        </div>
+        <p th:text="${post.content}"></p>
+        <div th:if="${post.imageUrl}">
+            <img th:src="@{${post.imageUrl}}" alt="Post Image" class="post-image">
+        </div>
+        <div class="time-ago">
+            <small th:text="'Posted ' + ${post.timeAgo}"></small>
+        </div>
+        <div class="post-footer">
+            <div>
+                <form th:action="@{'/forum/' + ${post.id} + '/like'}" method="post">
+                    <button type="submit" class="interaction-buttons btn-outline-danger btn-sm">❤️
+                        <span th:text="${post.likes}"></span></button>
+                </form>
+            </div>
+        </div>
+        <div th:each="comment : ${post.comments}">
+            <hr>
+            <div class="comment-header">
+                <strong th:text="${comment.username}"></strong>
+                <small th:text="${comment.timestamp}"></small>
+            </div>
+            <p th:text="${comment.content}"></p>
+            <div class="time-ago">
+                <small th:text="'Posted ' + ${comment.timeAgo}"></small>
+            </div>
+        </div>
+        <div class="post-footer">
+            <hr>
+            <form th:action="@{'/forum/' + ${post.id} + '/comment'}" method="post">
+                <label>
+                    <textarea name="content" class="comment-textarea" placeholder="Add a comment" required></textarea>
+                </label>
+                <div style="text-align:left;">
+                    <button type="submit" class="interaction-buttons btn-outline-primary btn-sm">Comment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
