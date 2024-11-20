@@ -1,6 +1,8 @@
 package com.petpedia.web.model;
 
 import jakarta.persistence.*;
+
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Entity
@@ -63,5 +65,22 @@ public class Comment {
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getTimeAgo() {
+        Duration duration = Duration.between(timestamp, LocalDateTime.now());
+        long minutes = duration.toMinutes();
+        long hours = duration.toHours();
+        long days = duration.toDays();
+
+        if (days > 0) {
+            return days + " day" + (days > 1 ? "s" : "") + " ago";
+        } else if (hours > 0) {
+            return hours + " hour" + (hours > 1 ? "s" : "") + " ago";
+        } else if (minutes > 0) {
+            return minutes + " minute" + (minutes > 1 ? "s" : "") + " ago";
+        } else {
+            return "Just now";
+        }
     }
 }

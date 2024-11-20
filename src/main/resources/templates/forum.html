@@ -51,7 +51,7 @@
         }
         .post-header {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 10px;
         }
         .post-header img {
@@ -60,9 +60,25 @@
             border-radius: 50%;
             margin-right: 10px;
         }
+        .post-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .post-meta {
+            display: flex;
+            flex-direction: row;
+        }
+        .post-meta small {
+            margin-right: 10px;
+        }
+        .time-ago {
+            text-align: right;
+            font-size: 0.8em;
+            color: gray;
+        }
         .post-footer {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             margin-top: 10px;
         }
         .create-post-button {
@@ -83,6 +99,16 @@
             margin-left: auto;
             margin-right: auto;
             padding: 5px;
+        }
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .comment-textarea {
+            width: 100%;
+            height: 100px;
+            resize: vertical;
         }
     </style>
 </head>
@@ -118,22 +144,20 @@
             <div th:each="post : ${posts}" class="post-card">
                 <div class="post-header">
                     <img src="/images/default-avatar.png" alt="User Profile Picture">
-                    <div>
+                    <div class="post-info">
                         <h3 th:text="${post.title}"></h3>
-                        <small th:text="${post.username} + ' • ' + ${post.timestamp}"></small>
+                        <div class="post-meta">
+                            <small th:text="${post.username}"></small>
+                            <small th:text="${post.timestamp}"></small>
+                        </div>
                     </div>
                 </div>
                 <p th:text="${post.content}"></p>
                 <div th:if="${post.imageUrl}">
                     <img th:src="@{${post.imageUrl}}" alt="Post Image">
                 </div>
-                <small th:text="'Posted ' + ${post.timeAgo}"></small>
-                <div th:each="comment : ${post.comments}">
-                    <hr>
-                    <div>
-                        <strong th:text="${comment.username}"></strong>
-                        <p th:text="${comment.content}"></p>
-                    </div>
+                <div class="time-ago">
+                    <small th:text="'Posted ' + ${post.timeAgo}"></small>
                 </div>
                 <div class="post-footer">
                     <div>
@@ -141,12 +165,29 @@
                             <button type="submit" class="interaction-buttons btn-outline-danger btn-sm">❤️
                                 <span th:text="${post.likes}"></span></button>
                         </form>
-
-                        <form th:action="@{'/forum/' + ${post.id} + '/comment'}" method="post">
-                            <textarea name="content" placeholder="Add a comment" required></textarea>
-                            <button type="submit" class="interaction-buttons btn-outline-primary btn-sm">Comment</button>
-                        </form>
                     </div>
+                </div>
+                <div th:each="comment : ${post.comments}">
+                    <hr>
+                    <div class="comment-header">
+                        <strong th:text="${comment.username}"></strong>
+                        <small th:text="${comment.timestamp}"></small>
+                    </div>
+                    <p th:text="${comment.content}"></p>
+                    <div class="time-ago">
+                        <small th:text="'Posted ' + ${comment.timeAgo}"></small>
+                    </div>
+                </div>
+                <div class="post-footer">
+                    <hr>
+                    <form th:action="@{'/forum/' + ${post.id} + '/comment'}" method="post">
+                        <label>
+                            <textarea name="content" class="comment-textarea" placeholder="Add a comment" required></textarea>
+                        </label>
+                        <div style="text-align:left;">
+                            <button type="submit" class="interaction-buttons btn-outline-primary btn-sm">Comment</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

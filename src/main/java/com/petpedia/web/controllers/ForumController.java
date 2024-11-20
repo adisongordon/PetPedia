@@ -30,6 +30,7 @@ public class ForumController {
     @GetMapping
     public String forum(Model model) {
         List<Post> posts = postService.getAllPostsWithComments();
+        posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));  // Sorting posts by timestamp in descending order
         model.addAttribute("posts", posts);
         return "forum";
     }
@@ -85,6 +86,7 @@ public class ForumController {
     @GetMapping("/{category}")
     public String forumByCategory(@PathVariable String category, Model model) {
         List<Post> posts = postService.getPostsByCategory(category);
+        posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));  // Sorting posts by timestamp in descending order
         model.addAttribute("posts", posts);
         return "forum";
     }
@@ -98,24 +100,28 @@ public class ForumController {
     @GetMapping("/dogs")
     public String getDogsForum(Model model) {
         List<Post> posts = postService.getAllPostsWithComments();
+        posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-dogs";
     }
     @GetMapping("/cats")
     public String getCatsForum(Model model) {
         List<Post> posts = postService.getAllPostsWithComments();
+        posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-cats";
     }
     @GetMapping("/birds")
     public String getBirdsForum(Model model) {
         List<Post> posts = postService.getAllPostsWithComments();
+        posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-birds";
     }
     @GetMapping("/small-mammals")
     public String getSmallMammalsForum(Model model) {
         List<Post> posts = postService.getAllPostsWithComments();
+        posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-small-mammals";
     }
@@ -123,6 +129,7 @@ public class ForumController {
     @GetMapping("/reptiles")
     public String getReptilesForum(Model model) {
         List<Post> posts = postService.getAllPostsWithComments();
+        posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-reptiles";
     }
@@ -130,6 +137,7 @@ public class ForumController {
     @GetMapping("/amphibians")
     public String getForumAmphibians(Model model) {
         List<Post> posts = postService.getAllPostsWithComments();
+        posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-amphibians";
     }
