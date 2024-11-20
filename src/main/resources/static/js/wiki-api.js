@@ -73,6 +73,7 @@ function makeCard(breedInfo) {
     var breedButton = document.createElement('a');
     breedButton.className = 'btn';
     breedButton.innerText = 'Read More';
+    breedButton.href = breedInfo.infoUrl;
     breedcol_xs.appendChild(breedButton);
 
     return newCard;

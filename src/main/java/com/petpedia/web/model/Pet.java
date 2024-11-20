@@ -21,6 +21,8 @@ public class Pet {
     private String breed;
     @Column
     private String imgUrl;
+    @Column
+    private String infoUrl;
     @Column(length = 4000)
     private String description;
     @Column(length = 4000)

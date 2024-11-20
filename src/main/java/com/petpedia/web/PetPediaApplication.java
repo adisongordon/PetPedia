@@ -20,6 +20,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Optional;
 
 @SpringBootApplication
 public class PetPediaApplication {
@@ -48,6 +49,11 @@ public class PetPediaApplication {
             p.setBreed((String) pet.get("name"));
             p.setSpecies(species);
             p.setDescription((String) pet.get("description"));
+            if (species.equalsIgnoreCase("cat")) {
+                p.setInfoUrl((String) pet.get("wikipedia_url"));
+            } else {
+                p.setInfoUrl("https://en.wikipedia.org/wiki/" + p.getBreed());
+            }
 
             if (repository.existsByBreed(p.getBreed()))
                 continue;
@@ -67,7 +73,7 @@ public class PetPediaApplication {
             }
 
             HashMap<String, Object> weights = (HashMap<String, Object>) pet.get("weight");
-            HashMap<String, Object> heights = (HashMap<String, Object>) pet.get("weight");
+            HashMap<String, Object> heights = (HashMap<String, Object>) pet.get("height");
             String weight = (String) weights.get("imperial");
             String tableInfo = "{";
             tableInfo += "\"Weight\": \"" + weight + "\", ";
@@ -109,6 +115,7 @@ public class PetPediaApplication {
             TypeReference<HashMap<String, Object>> typeRefMap = new TypeReference<HashMap<String, Object>>() {};
 
             ArrayList<HashMap<String, Object>> otherPetInfo = mapper.readValue(new File("src/main/resources/static/table.json"), typeRefList);
+            ArrayList<HashMap<String, Object>> otherPetPages = mapper.readValue(new File("src/main/resources/static/pages.json"), typeRefList);
             for (HashMap<String, Object> pet : otherPetInfo) {
                 Pet p = new Pet();
 
@@ -116,6 +123,19 @@ public class PetPediaApplication {
                 p.setBreed((String) pet.get("name"));
                 p.setDescription("");
                 p.setImgUrl((String) pet.get("img-src"));
+
+                String searchTerm = p.getBreed()
+                        .replace(' ', '-')
+                        .replaceAll("’", "")
+                        .toLowerCase();
+                Optional<HashMap<String, Object>> optUrlPath = otherPetPages.stream()
+                        .filter(item -> ((String)item.get("url")).contains(searchTerm))
+                        .findFirst();
+                String urlPath = "";
+                if (optUrlPath.isPresent())
+                    urlPath = (String) optUrlPath.get().get("url");
+                p.setInfoUrl("https://www.petguide.com" + urlPath);
+                System.out.println(p.getInfoUrl());
 
                 if (petDataRepository.existsByBreed(p.getBreed()))
                     continue;
