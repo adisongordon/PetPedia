@@ -15,4 +15,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query("SELECT p FROM Post p LEFT JOIN FETCH p.comments")
     List<Post> findAllWithComments();
+
+    @Query("SELECT p FROM Post p LEFT JOIN FETCH p.comments WHERE p.category = :category")
+    List<Post> findByCategory(@Param("category") String category);
 }

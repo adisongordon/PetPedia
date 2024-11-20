@@ -40,6 +40,7 @@ public class ForumController {
             @RequestParam("title") String title,
             @RequestParam("content") String content,
             @RequestParam(value = "image", required = false) MultipartFile image,
+            @RequestParam("category") String category,
             Model model) throws IOException {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -49,6 +50,7 @@ public class ForumController {
         post.setUsername(currentUsername);
         post.setTitle(title);
         post.setContent(content);
+        post.setCategory(category);
 
         if (image != null && !image.isEmpty()) {
             String imageUrl = "/user_images/" + image.hashCode();
@@ -84,7 +86,7 @@ public class ForumController {
     }
 
     @GetMapping("/{category}")
-    public String forumByCategory(@PathVariable String category, Model model) {
+    public String getPostsByCategory(@PathVariable("category") String category, Model model) {
         List<Post> posts = postService.getPostsByCategory(category);
         posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));  // Sorting posts by timestamp in descending order
         model.addAttribute("posts", posts);
@@ -99,28 +101,28 @@ public class ForumController {
 
     @GetMapping("/dogs")
     public String getDogsForum(Model model) {
-        List<Post> posts = postService.getAllPostsWithComments();
+        List<Post> posts = postService.getPostsByCategory("dogs");
         posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-dogs";
     }
     @GetMapping("/cats")
     public String getCatsForum(Model model) {
-        List<Post> posts = postService.getAllPostsWithComments();
+        List<Post> posts = postService.getPostsByCategory("cats");
         posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-cats";
     }
     @GetMapping("/birds")
     public String getBirdsForum(Model model) {
-        List<Post> posts = postService.getAllPostsWithComments();
+        List<Post> posts = postService.getPostsByCategory("birds");
         posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-birds";
     }
     @GetMapping("/small-mammals")
     public String getSmallMammalsForum(Model model) {
-        List<Post> posts = postService.getAllPostsWithComments();
+        List<Post> posts = postService.getPostsByCategory("small-mammals");
         posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-small-mammals";
@@ -128,7 +130,7 @@ public class ForumController {
 
     @GetMapping("/reptiles")
     public String getReptilesForum(Model model) {
-        List<Post> posts = postService.getAllPostsWithComments();
+        List<Post> posts = postService.getPostsByCategory("reptiles");
         posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-reptiles";
@@ -136,7 +138,7 @@ public class ForumController {
 
     @GetMapping("/amphibians")
     public String getForumAmphibians(Model model) {
-        List<Post> posts = postService.getAllPostsWithComments();
+        List<Post> posts = postService.getPostsByCategory("amphibians");
         posts.sort((p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         model.addAttribute("posts", posts);
         return "forum-amphibians";

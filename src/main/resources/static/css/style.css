@@ -87,6 +87,23 @@ body {
     margin-right: auto;
 }
 
+.interaction-buttons {
+    background-color: #46eab1;
+    background-image: linear-gradient(90deg, #0367a6 0%, #008997 74%);
+    border-radius: 10px;
+    border: 1px solid #0367a6;
+    color: #e9e9e9;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+}
+
 .post-form button:hover {
     background-color: #218838;
 }
@@ -105,10 +122,101 @@ body {
     margin-bottom: 5px;
 }
 
+.post-image {
+    max-height: 500px;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
 .post small {
     color: #777;
 }
 
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.comment-textarea {
+    width: 100%;
+    height: 100px;
+    resize: vertical;
+}
+
+.sidebar {
+    width: 250px;
+    float: left;
+    margin-right: 20px;
+    padding: 20px;
+}
+.category-title {
+    font-weight: bold;
+    margin-top: 20px;
+}
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+.sidebar ul li {
+    margin: 5px 0;
+}
+.title-and-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+.post-card {
+    background-color: white;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 50px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+.post-header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+.post-header img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.post-info {
+    display: flex;
+    flex-direction: column;
+}
+.post-meta {
+    display: flex;
+    flex-direction: row;
+}
+.post-meta small {
+    margin-right: 10px;
+}
+.time-ago {
+    text-align: right;
+    font-size: 0.8em;
+    color: gray;
+}
+.post-footer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+.create-post-button {
+    margin: 20px 0;
+}
 
 footer {
     margin-top: 150px;

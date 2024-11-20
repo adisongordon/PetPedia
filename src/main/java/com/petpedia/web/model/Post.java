@@ -21,6 +21,7 @@ public class Post {
     private String timeAgo;
     @Column(nullable = false)
     private int likes = 0;
+    private String category;
 
     // Relationship with Comment
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -110,6 +111,14 @@ public class Post {
     public void addComment(Comment comment) {
         comments.add(comment);
         comment.setPost(this);
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getTimeAgo() {
