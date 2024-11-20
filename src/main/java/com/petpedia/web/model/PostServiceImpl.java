@@ -33,9 +33,7 @@ public class PostServiceImpl implements PostService {
     @Transactional(readOnly = true)
     @Override
     public List<Post> getPostsByCategory(String category) {
-        return postRepository.findAll().stream()
-                .filter(post -> post.getTitle().toLowerCase().contains(category.toLowerCase()))
-                .toList();
+        return postRepository.findByCategory(category);
     }
 
     @Override
