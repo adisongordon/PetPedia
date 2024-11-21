@@ -2,6 +2,9 @@ package com.petpedia.web.model;
 
 import java.util.List;
 
+/**
+ * Service interface for managing posts.
+ */
 public interface PostService {
     List<Post> getAllPosts();
     Post getPostById(Long id);

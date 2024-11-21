@@ -6,6 +6,12 @@ import lombok.*;
 import java.util.List;
 
 
+/**
+ * The Users class represents a user entity in the system.
+ * It contains essential information such as the user's username, email, password, and an associated profile image.
+ * Each user can also own multiple pets, represented by the UserPet class.
+ *
+ */
 @Entity
 @Builder
 @Getter

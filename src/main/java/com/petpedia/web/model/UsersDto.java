@@ -6,6 +6,11 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Data Transfer Object (DTO) representing a user in the system.
+ * This class encapsulates user-related information including the user's id, username,
+ * email, password, image URL, and a list of pets associated with the user.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
