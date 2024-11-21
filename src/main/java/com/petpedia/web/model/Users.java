@@ -2,6 +2,8 @@ package com.petpedia.web.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Entity
 public class Users {
@@ -11,12 +13,19 @@ public class Users {
     private String username;
     private String email;
     private String password;
+    @Lob
+    private byte[] profilePicture;
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<UserPet> pets;
+
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getUsername() {
         return username;
     }
@@ -36,9 +45,18 @@ public class Users {
         this.password = password;
     }
 
-    /*
-        TODO:
-            Enable the ability to allow users to customize their profile,
-            add a profile image, add their pets, etc.
-     */
+    public byte[] getProfilePicture() {
+        return profilePicture;
+    }
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public List<UserPet> getPets() {
+        return pets;
+    }
+
+    public void setPets(List<UserPet> pets) {
+        this.pets = pets;
+    }
 }
