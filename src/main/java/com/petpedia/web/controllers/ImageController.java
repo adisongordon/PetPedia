@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 
+/**
+ * Controller for handling image-related endpoints.
+ */
 @Controller
 @RequiredArgsConstructor
 public class ImageController {
