@@ -205,7 +205,7 @@ function showResults() {
                 tableData = JSON.parse(pet.tableInfo);
                 breedTable.innerHTML = "";
                 for (const key of Object.keys(tableData)) {
-                    if (tableData[key] === null || tableData[key] === "") {
+                    if (tableData[key] === null || tableData[key] === "null" || tableData[key] === "") {
                         continue;
                     }
                     breedTable.innerHTML += `
