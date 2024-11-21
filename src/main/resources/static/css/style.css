@@ -217,6 +217,39 @@ body {
 .create-post-button {
     margin: 20px 0;
 }
+.profile-picture, .comment-profile-picture {
+    border-radius: 50%;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+}
+
+.comment-profile-picture {
+    width: 50px;
+    height: 50px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-container {
+    text-align: center;
+}
+
+.comment-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-content {
+    margin-left: 60px;
+}
+
 
 footer {
     margin-top: 150px;

@@ -14,7 +14,6 @@
             width: 200px;
         }
 
-        /* Profile picture container */
         .profile-container {
             padding: 0;
             width: 150px;
@@ -33,7 +32,6 @@
             max-width: 100%;
             max-height: 100%;
         }
-
 
         .profile-header h2 {
             margin-left: 5px;
@@ -74,6 +72,20 @@
         .filebox input:disabled {
             background-color: #fff;
         }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .profile-container {
+            text-align: center;
+        }
+        .rounded-circle {
+            border-radius: 50%;
+            width: 150px;  /* Adjust size as needed */
+            height: 150px;  /* Adjust size as needed */
+        }
     </style>
 </head>
 <body>
@@ -81,11 +93,9 @@
 <div th:replace="~{fragments/header :: header}"></div>
 
 <div class="row">
-
     <div class="list-group col-md-3 aside">
         <a th:href="@{/profile-my-posts}" class="list-group-item list-group-item-action">My Forum Posts</a>
     </div>
-
 
     <div class="container">
 
@@ -95,47 +105,36 @@
         </div>
 
         <div class="profile-container mt-4 center">
-            <img id="profileImage" src="/images/profile-picture.png" alt="Profile Picture">
+            <img id="profileImage" th:src="@{/profile/picture}" alt="Profile Picture" class="rounded-circle">
         </div>
 
         <div class="mt-4">
             <p>Change Profile Picture</p>
         </div>
         <div class="row filebox ml-1">
-            <input class="upload" value="No file chosen" placeholder="No file chosen" disabled="disabled">
-            <label for="profilePicture">Upload</label>
-            <input type="file" class="d-none" id="profilePicture" accept="image/*" onchange="previewProfilePicture(event)">
-            <div class="col-md-3">
-                <button class="btn btn-primary btn-block" onclick="saveProfile()">
-                    Save Change
-                </button>
-            </div>
+            <form id="profile-picture-form" action="/profile/updateProfilePicture" method="post" enctype="multipart/form-data">
+                <input class="upload" value="No file chosen" placeholder="No file chosen" disabled="disabled">
+                <label for="profilePicture">Upload</label>
+                <input type="file" class="d-none" id="profilePicture" name="file" accept="image/*" onchange="previewProfilePicture(event)">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                </div>
+            </form>
         </div>
 
         <hr>
 
-        <!-- Pets Section -->
-        <!--
-        -->
         <div class="mt-4">
             <h3>Your Pets</h3>
-            <!-- Pet cards here -->
-
-            <div class="pets-list">
-
-            </div>
-            <!-- Add Pet button -->
+            <div class="pets-list"></div>
             <button class="btn btn-success mt-3" data-toggle="modal" data-target="#addPetModal">Add Pet</button>
         </div>
     </div>
-
 </div>
 
 <div th:replace="~{fragments/footer :: footer}"></div>
 
-<!-- Add Pet Modal -->
-<div class="modal fade" id="addPetModal" tabindex="-1" role="dialog" aria-labelledby="addPetModalLabel"
-     aria-hidden="true">
+<div class="modal fade" id="addPetModal" tabindex="-1" role="dialog" aria-labelledby="addPetModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -145,75 +144,152 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="addPetForm">
+                <form id="addPetForm" action="/profile/addPet" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="petName">Pet Name</label>
-                        <input type="text" class="form-control" id="petName" placeholder="Enter your pet's name">
+                        <input type="text" class="form-control" id="petName" name="name" placeholder="Enter your pet's name" required>
                     </div>
                     <div class="form-group">
                         <label for="petSpecies">Species</label>
-                        <input type="text" class="form-control" id="petSpecies"
-                               placeholder="Enter species (e.g., Dog, Cat)">
+                        <input type="text" class="form-control" id="petSpecies" name="species" placeholder="Enter species (e.g., Dog, Cat)" required>
                     </div>
                     <div class="form-group">
                         <label for="petAge">Age</label>
-                        <input type="number" class="form-control" id="petAge" placeholder="Enter your pet's age">
+                        <input type="number" class="form-control" id="petAge" name="age" placeholder="Enter your pet's age" required>
                     </div>
                     <div class="form-group">
                         <label for="petHealth">Health Issues</label>
-                        <textarea class="form-control" id="petHealth" placeholder="Enter any health issues"></textarea>
+                        <textarea class="form-control" id="petHealth" name="healthIssues" placeholder="Enter any health issues"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="petPicture">Pet Picture</label>
-                        <input type="file" class="form-control-file" id="petPicture" accept="image/*">
+                        <input type="file" class="form-control-file" id="petPicture" name="picture" accept="image/*" required>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="savePet()">Save Pet</button>
+                    <button type="submit" class="btn btn-primary">Save Pet</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
-    function savePet() {
-        var petName = document.getElementById('petName').value;
-        var petSpecies = document.getElementById('petSpecies').value;
-        var petAge = document.getElementById('petAge').value;
-        var petHealth = document.getElementById('petHealth').value;
-        var petPicture = document.getElementById('petPicture').files[0];
+    async function addPet() {
+        const form = document.getElementById('addPetForm');
+        const formData = new FormData(form);
 
-        var reader = new FileReader();
-        reader.onload = function () {
-            var petList = document.querySelector('.pets-list'); // Select the Pets section
+        try {
+            const response = await fetch('/profile/addPet', {
+                method: 'POST',
+                body: formData
+            });
 
-            var newPetCard = `
-                    <div class="card mb-3">
-                        <div class="row no-gutters">
-                            <div class="col-md-4">
-                                <img src="${reader.result}" class="card-img" alt="${petName}">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">${petName}</h5>
-                                    <p class="card-text">Species: ${petSpecies}</p>
-                                    <p class="card-text">Age: ${petAge} years old</p>
-                                    <p class="card-text">Health Issues: ${petHealth}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
+            const result = await response.json();
+            alert(result.message);
 
-            petList.insertAdjacentHTML('beforeend', newPetCard); // Add new pet to the Pets section
-        };
-        reader.readAsDataURL(petPicture); // Display the uploaded pet image
+            if (response.ok) {
+                // Close the modal
+                $('#addPetModal').modal('hide');
 
-        // Close the modal after saving
-        $('#addPetModal').modal('hide');
+                // Refresh the pet list dynamically
+                loadPetList();
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while adding the pet.');
+        }
     }
+
+    async function loadPetList() {
+        try {
+            const response = await fetch('/profile/pets'); // Adjust this URL as needed
+            const pets = await response.json();
+
+            const petListContainer = document.getElementById('petList');
+            petListContainer.innerHTML = '';
+
+            pets.forEach(pet => {
+                const petElement = document.createElement('div');
+                petElement.className = 'card mb-3';
+                petElement.innerHTML = `
+                        <div class="card-body">
+                            <h5 class="card-title">${pet.name}</h5>
+                            <p class="card-text">Species: ${pet.species}</p>
+                            <p class="card-text">Age: ${pet.age}</p>
+                            <p class="card-text">Health Issues: ${pet.healthIssues}</p>
+                            <img src="data:${pet.image.type};base64,${pet.image.image}" class="card-img-top" alt="${pet.name}'s picture">
+                        </div>
+                    `;
+                petListContainer.appendChild(petElement);
+            });
+        } catch (error) {
+            console.error('Error loading pets:', error);
+        }
+    }
+
+    // Load the initial list of pets when the page loads
+    document.addEventListener('DOMContentLoaded', loadPetList);
+
+    function deletePet(petId) {
+        fetch(`/profile/deletePet/${petId}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Delete response:', data); // Log the response for debugging
+                if (data === "Pet deleted successfully") {
+                    const petCard = document.getElementById(`pet-card-${petId}`);
+                    if (petCard) {
+                        petCard.remove();
+                    }
+                } else {
+                    alert(data);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function refreshPetsList() {
+        fetch('/profile/pets')
+            .then(response => response.json())
+            .then(pets => {
+                const petList = document.querySelector('.pets-list');
+                petList.innerHTML = '';
+                pets.forEach(pet => {
+                    const newPetCard = createPetCard(pet);
+                    petList.insertAdjacentHTML('beforeend', newPetCard);
+                });
+            })
+            .catch(error => console.error('Error refreshing pet list:', error));
+    }
+
+    function createPetCard(pet) {
+        return `
+            <div class="card mb-3" id="pet-card-${pet.id}">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="/profile/pet/picture/${pet.id}" class="card-img" alt="${pet.name}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">${pet.name}</h5>
+                            <p class="card-text">Species: ${pet.species}</p>
+                            <p class="card-text">Age: ${pet.age} years old</p>
+                            <p class="card-text">Health Issues: ${pet.healthIssues}</p>
+                            <button class="btn btn-danger" onclick="deletePet(${pet.id})">Delete Pet</button>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+    }
+
+    refreshPetsList();
 
     function previewProfilePicture(event) {
         const profileImage = document.getElementById('profileImage');
@@ -228,11 +304,93 @@
         }
     }
 
-    $("#profilePicture").on('change',function(){
-        var fileName = $("#profilePicture")[0].files[0].name;
+    $("#profilePicture").on('change', function() {
+        const fileName = $("#profilePicture")[0].files[0].name;
         $(".upload").val(fileName);
     });
 
+    document.getElementById('profile-picture-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        fetch('/profile/updateProfilePicture', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message || 'Profile picture updated successfully.');
+                if (!data.message) {
+                    const profileImage = document.getElementById('profilePicture').files[0];
+                    if (profileImage) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            $('#profileImage').attr('src', e.target.result);
+                        }
+                        reader.readAsDataURL(profileImage);
+                    } else {
+                        $('#profileImage').attr('src', "/images/profile-picture.png");
+                    }
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+    $('#addPetForm').submit(function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        fetch('/profile/addPet', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === "Pet added successfully") {
+                    const petId = data.petId;
+                    const petName = document.getElementById('petName').value;
+                    const petSpecies = document.getElementById('petSpecies').value;
+                    const petAge = document.getElementById('petAge').value;
+                    const petHealth = document.getElementById('petHealth').value;
+                    //const petPicture = document.getElementById('petPicture').files[0];
+                    const petPictureUrl = `/profile/pet/picture/${pet.id}`;
+
+                    const reader = new FileReader();
+                    reader.onload = function() {
+                        const petList = document.querySelector('.pets-list');
+                        const newPetCard = `
+                        <div class="card mb-3" id="pet-card-${pet.id}">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="${petPictureUrl}" class="card-img" alt="${pet.name}">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${pet.name}</h5>
+                                        <p class="card-text">Species: ${pet.species}</p>
+                                        <p class="card-text">Age: ${pet.age} years old</p>
+                                        <p class="card-text">Health Issues: ${pet.healthIssues}</p>
+                                        <button class="btn btn-danger" onclick="deletePet(${pet.id})">Delete Pet</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                        petList.insertAdjacentHTML('beforeend', newPetCard);
+                    };
+                    reader.readAsDataURL(petPicture);
+
+                    $('#addPetForm')[0].reset();
+                    $('#addPetModal').modal('hide');
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
 </script>
 </body>
 </html>

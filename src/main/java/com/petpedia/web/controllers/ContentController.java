@@ -97,8 +97,6 @@ public class ContentController {
     @GetMapping("/map")
     public String map() {return "map";}
 
-    @GetMapping("/profile")
-    public String profile() {return "profile";}
 
     @GetMapping("/create-post")
     public String showCreatePostPage(Model model) {
