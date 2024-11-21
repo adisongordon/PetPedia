@@ -63,6 +63,8 @@ public class SecSecurityConfig {
                     registry.requestMatchers("/map").permitAll();
                     registry.requestMatchers("/api/**").permitAll();
                     registry.requestMatchers("/req/signup").permitAll();
+                    registry.requestMatchers("/profile/**").permitAll();
+                    registry.requestMatchers("/user_images/**").permitAll();
                     registry.anyRequest().authenticated();
                 })
                 .logout(config -> config.logoutSuccessUrl("/home"))

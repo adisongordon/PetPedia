@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository interface for managing Post entities.
+ */
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("SELECT p FROM Post p LEFT JOIN FETCH p.comments WHERE p.id = :id")

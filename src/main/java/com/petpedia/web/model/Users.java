@@ -1,9 +1,24 @@
 package com.petpedia.web.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.List;
 
 
+/**
+ * The Users class represents a user entity in the system.
+ * It contains essential information such as the user's username, email, password, and an associated profile image.
+ * Each user can also own multiple pets, represented by the UserPet class.
+ *
+ */
 @Entity
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "users")
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,34 +26,11 @@ public class Users {
     private String username;
     private String email;
     private String password;
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
+    private Image image;
 
-    /*
-        TODO:
-            Enable the ability to allow users to customize their profile,
-            add a profile image, add their pets, etc.
-     */
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<UserPet> pets;
+
 }

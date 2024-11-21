@@ -15,7 +15,7 @@ function getApiData(species)
         {
             //if (breeds[i].imgUrl == "") continue;
             breedCards.push(makeCard(breeds[i]))
-            document.getElementsByClassName('container mt-5')[0].appendChild(breedCards[breedCards.length -1]);
+            document.getElementsByClassName('container mt-5')[0].appendChild(breedCards[breedCards.length - 1]);
         }
     });
 
@@ -62,6 +62,9 @@ function makeCard(breedInfo) {
     }
     breedTable.innerHTML = ""; 
     for (const key of Object.keys(tableData)) {
+        if (tableData[key] === null || tableData[key] === "null" || tableData[key] === "") {
+            continue;
+        }
         breedTable.innerHTML += `
         <tr>
             <td>${key}</td>
@@ -73,6 +76,7 @@ function makeCard(breedInfo) {
     var breedButton = document.createElement('a');
     breedButton.className = 'btn';
     breedButton.innerText = 'Read More';
+    breedButton.href = breedInfo.infoUrl;
     breedcol_xs.appendChild(breedButton);
 
     return newCard;

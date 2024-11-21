@@ -77,12 +77,6 @@
     <div class="row">
 
         <div class="sidebar">
-            <form method="get" action="/forum/search">
-                <div class="input-group">
-                    <input type="text" name="query" class="form-control" placeholder="Search Forums">
-                    <button class="btn btn-success btn-block mt-2">Search</button>
-                </div>
-            </form>
 
             <div class="category-title">Favorite Forums</div>
             <ul>
@@ -107,7 +101,7 @@
 
             <div th:each="post : ${posts}" class="post-card">
                 <div class="post-header">
-                    <img src="/images/default-avatar.png" alt="User Profile Picture">
+                    <img th:src="@{'/profile/picture/' + ${post.username}}" alt="User Profile Picture" class="profile-picture">
                     <div class="post-info">
                         <h3 th:text="${post.title}"></h3>
                         <div class="post-meta">
@@ -134,10 +128,13 @@
                 <div th:each="comment : ${post.comments}">
                     <hr>
                     <div class="comment-header">
-                        <strong th:text="${comment.username}"></strong>
-                        <small th:text="${comment.timestamp}"></small>
+                        <img th:src="@{'/profile/picture/' + ${comment.username}}" alt="User Profile Picture" class="comment-profile-picture">
+                        <div class="comment-info">
+                            <strong th:text="${comment.username}"></strong>
+                            <small th:text="${comment.timestamp}"></small>
+                        </div>
                     </div>
-                    <p th:text="${comment.content}"></p>
+                    <p th:text="${comment.content}" class="comment-content"></p>
                     <div class="time-ago">
                         <small th:text="'Posted ' + ${comment.timeAgo}"></small>
                     </div>

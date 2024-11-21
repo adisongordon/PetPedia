@@ -135,14 +135,13 @@
     <button type="button" class="btn btn-primary" name="get-location-btn" onclick="getLocation()">Use Current Location</button>
 
 
-
     <div class="map-container">
         <iframe
                 id="map"
                 width="100%"
                 height="600"
                 referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg&q=pet+supplies+Salt+Lake+City"
+                src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg&q=pet+supplies+84148"
                 allowfullscreen>
         </iframe>
     </div>
@@ -157,7 +156,7 @@
           if (selector.value == "Current Pet Owner")
             reqType = "pet+supplies+";
           else
-            reqType = "pet+rescue+";
+            reqType = "pets+for+sale+";
           requestChanged();
         }
 
@@ -205,6 +204,11 @@
             });
             requestChanged();
           }
+
+          function locationError(e) {
+            console.error(e);
+          }
+
           if (navigator.geolocation) {
             await navigator.geolocation.getCurrentPosition(editLocation, null, {enableHighAccuracy: true})
           }
