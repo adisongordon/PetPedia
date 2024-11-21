@@ -149,8 +149,9 @@
 
     <script>
         var reqURL = "https://www.google.com/maps/embed/v1/search?key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg&q=";
-        var reqLocation = "Salt+Lake+City";
+        var reqLocation = "Salt Lake City";
         var reqType = "pet+supplies+";
+        var coords = {lat: 40.735, lng: -111.873};
 
         function reqTypeChanged(selector) {
           if (selector.value == "Current Pet Owner")
@@ -160,38 +161,52 @@
           requestChanged();
         }
 
-        function locationChanged() {
-          reqLocation = document.getElementById("location-box").value;
+        async function locationChanged() {
+          reqLocation = document.getElementById("location-box").value
+          coords = await getCoords(reqLocation);
           requestChanged();
         }
 
         function requestChanged() {
-          document.getElementById("map").src = reqURL + reqType + reqLocation;
+          document.getElementById("map").src = reqURL + reqType + "near+" + reqLocation + "&center=" + coords.lat + "," + coords.lng + "&zoom=10";
         }
 
-        function getLocation() {
-          function editLocation(position) {
-            console.log(position.coords);
-            fetch("https://maps.googleapis.com/maps/api/geocode/json?latlng="+position.coords.latitude+","+position.coords.longitude+"&key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg")
+        async function getCoords(address) {
+          let lat = 0;
+          let lng = 0;
+          await fetch("https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg")
+          .then((response) => response.json())
+          .then((response) => {
+            if (response.status == "OK") {
+              lat = response.results[0].geometry.location.lat;
+              lng = response.results[0].geometry.location.lng;
+            }
+          });
+          return {"lat": lat, "lng": lng};
+        }
+
+        async function getLocation() {
+          async function editLocation(position) {
+            coords = {lat: position.coords.latitude, lng: position.coords.longitude}
+            await fetch("https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyCQTZ9epkIxVCzVAvKpWXYlnHoJj-vfzTg&result_type=postal_code")
             .then((response) => response.json())
             .then((response) => {
               console.log(response);
               if (response.status == "OK"){
                 for (let i = 0; i < response.results[0].address_components.length; i++) {
-                    if (response.results[0].address_components[i].types.includes("locality")) {
+                    if (response.results[0].address_components[i].types.includes("postal_code")) {
                         reqLocation = response.results[0].address_components[i].long_name;
                         break;
                     }
                 }
-                requestChanged();
               }
               else {
-                alert("No locality found.")
               }
             });
+            requestChanged();
           }
           if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(editLocation, null, {enableHighAccuracy: true})
+            await navigator.geolocation.getCurrentPosition(editLocation, null, {enableHighAccuracy: true})
           }
           else {
             console.error("Geolocation not supported");
