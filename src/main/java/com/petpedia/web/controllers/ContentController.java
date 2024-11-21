@@ -100,6 +100,9 @@ public class ContentController {
     @GetMapping("/profile")
     public String profile() {return "profile";}
 
+    @GetMapping("/adoption")
+    public String adoption() {return "adoption";}
+
     @GetMapping("/create-post")
     public String showCreatePostPage(Model model) {
         String username = usersDetailsService.getLoggedInUsername();

@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pet Pedia</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
-    
-
     <style>
         :root {
             /* COLORS */
@@ -15,6 +13,36 @@
             --gray: #333;
             --blue: #0367a6;
             --lightblue: #008997;
+        }
+
+        aside {
+            float: left;
+            width: 400px;
+            height: 400px;
+            border: 1px solid;
+            padding: 10px;
+        }
+
+        cards {
+            align-items: right;
+            justify-content: right;
+            min-height: 600px;
+            margin-left: 550px;
+            margin-right: auto;
+            margin-top: 50px;
+        }
+
+        .cards {
+            align-items: right;
+            justify-content: right;
+            min-height: 600px;
+            margin-left: 550px;
+            margin-right: auto;
+            margin-top: 50px;
+        }
+
+        main {
+            min-height: 600px;
         }
 
         table {
@@ -39,12 +67,13 @@
             transition: 0.3s;
             border-radius: 5px;
             width: 600px;
+            align-self: center;
         }
         .card:hover {
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
         }
         .btn {
-            background-color: #0367a6;
+            background-color: #breedImg0367a6;
             background-image: linear-gradient(90deg, #0367a6 0%, #008997 74%);
             border-radius: 20px;
             border: 1px solid #0367a6;
@@ -77,36 +106,63 @@
             width: 100px;
         }
 
-        #breedImg {
+        #petImg {
             display: block;
             width: 100%;
             height: auto;
         }
     </style>
-
 </head>
 <body style="background-color:rgba(232,234,231)">
 <div th:replace="~{fragments/header :: header}"></div>
 
-<div class="container mt-5">
-    <h1 style="text-align: center; color:#124e7e">Cats</h1>
-    <label for="breedSearch">Narrow Results</label>
-    <input type="text" id="breedSearch" name="breedSearch" oninput="searchBreeds(this.value)">
-    <input type="button" id="clearSearchBtn" name="clearSearchBtn" onclick="clearSearch()" value="Clear">
-    <br>
-    <div class="mr-2" style="margin-right:10px;">
-    </div>
+<aside>
+    <label for="zipcode">Zipcode:</label>
+    <input type="text" id="zipcode" name="zipcode"><br>
 
+    <label for="distance">Distance (miles):</label>
+    <input type="number" id="distance" name="distance"><br>
+
+    <label for="species">Species:</label>
+    <select name="species" id="species" onchange="populateBreeds(this.value)">
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="bird">Bird</option>
+        <option value="horse">Horse</option>
+        <option value="rabbit">Rabbit</option>
+        <option value="turtle">Turtle</option>
+    </select><br>
+
+    <label for="breed">Breed:</label>
+    <select name="breed" id="breed">
+        <option value="Any">Any</option>
+    </select><br>
+
+    <button type="button" name="search" id="search" onclick="petSearch()">Search</button>
+</aside>
+
+<div class="cards" >
+    <div class="card">
+        <div class="px-2 py-2">
+            <div class="Enter your criteria and find a pet to adopt!">
+                <h2>
+                    Enter your criteria and find a pet to adopt!
+                </h2>
+                <p>
+                    Enter your zip code and search radius, as well as the species and breed you are looking for,
+                    hit search, and find your new best friend!
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="/js/wiki-api.js"></script>
-
+<script src="/js/adoption.js"></script>
 <script>
-    var cards = getApiData("cat");
-    console.log(cards);
+    populateBreeds("Dog");
 </script>
 
 <div th:replace="~{fragments/footer :: footer}"></div>
-</body>
+</body>>
 </html>

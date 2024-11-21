@@ -52,6 +52,7 @@ public class SecSecurityConfig {
                     registry.requestMatchers("/css/**", "/js/**", "/fragments/**", "/images/**").permitAll();
                     registry.requestMatchers("/").permitAll();
                     registry.requestMatchers("/home").permitAll();
+                    registry.requestMatchers("/adoption").permitAll();
                     registry.requestMatchers("/wiki").permitAll();
                     registry.requestMatchers("/wiki/**").permitAll();
                     registry.requestMatchers("/quiz").permitAll();
