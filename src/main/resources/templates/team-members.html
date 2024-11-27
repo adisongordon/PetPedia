@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Members</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+      background-color: rgba(232, 234, 231);
+    }
+
+    h1 {
+      text-align: center;
+      color: #124e7e;
+      margin-bottom: 40px;
+    }
+
+    .team-member {
+      margin-bottom: 40px;
+    }
+
+    .team-member img {
+      border-radius: 50%;
+      max-width: 300px;
+      height: 300px;
+    }
+
+    .team-member .bio {
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-info a {
+      color: #0367a6;
+      font-weight: bold;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="container">
+  <h1>Meet the Team</h1>
+
+  <div class="row team-member align-items-center">
+    <div class="col-md-4 text-center">
+      <img src="/images/adison-teams.jpg" alt="Adison Gordon">
+    </div>
+    <div class="col-md-8 bio">
+      <h2>Adison Gordon</h2>
+      <p>
+        I am a senior Computer Science student at the University of Utah with a strong passion for web design and development.
+        I love to combine technical expertise with creative problem-solving to craft intuitive and engaging user experiences. My academic journey has been
+        marked by hands-on projects, including a capstone project centered on creating Pet-Pedia, a comprehensive pet care website. I also contributed to
+        a hackathon project focused on environmental sustainability, developing a platform that enables users to donate unwanted items within their
+        local community. This initiative aimed to enhance community connections while minimizing waste.</p>
+      <p>
+        As a lifelong advocate for rescue animals, I share my home with several furry friends, all of whom are rescues. This connection to animals inspired the
+        creation of Pet-Pedia, a resource designed to educate pet owners and promote the well-being of pets.
+      </p>
+      <p>
+        Beyond my academic pursuits, I have a big interest in flora and fauna, from gardening to caring for exotic pets, music, and exploring various art forms,
+        including ceramics, sculpting, and painting. I look forward to a future where I can combine my love for coding, creativity, and advocacy to make a meaningful impact.
+      </p>
+      <div class="contact-info">
+        <p> I’d love to connect to explore collaboration opportunities, exchange innovative ideas, or share common interests. </p>
+        <p>Email: <a href="mailto:gordonadison@gmail.com">gordonadison@gmail.com</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/adison-gordon-052791234" target="_blank">Adison Gordon</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row team-member flex-row-reverse align-items-center">
+    <div class="col-md-4 text-center">
+      <img src="/images/emily-team.png" alt="Emily Reynolds">
+    </div>
+    <div class="col-md-8 bio">
+      <h2>Emily Reynolds</h2>
+      <p>
+        I am a senior at the University of Utah, set to graduate in Fall 2024 with a Bachelor of Science in Computer Science. My academic and professional experiences are rooted
+        in software engineering, with a primary focus on backend development and additional expertise in frontend technologies. Currently, I am a Software Engineering Intern at
+        Snap One, a leader in smart-living solutions, where I contribute to developing innovative systems that empower users to customize their smart-living experiences.
+        My project portfolio showcases diverse achievements, including a capstone project designed to assist pet owners and prospective adopters by providing comprehensive resources
+        for making informed decisions about pet care. Additionally, I participated in a hackathon project aimed at fostering environmental sustainability by creating a platform for
+        users to donate unwanted items locally, promoting community well-being while reducing waste.
+      </p>
+      <p>
+        Beyond my technical endeavors, I am passionate about lifelong learning and creativity. I enjoy exploring topics in American history, reading fantasy novels, attending live performances,
+        and spending quality time with friends and family.
+      </p>
+      <div class="contact-info">
+        <p>Feel free to connect with me to discuss collaborative opportunities, innovative ideas, or shared interests.</p>
+        <p>Email: <a href="mailto:emilyjreynolds00@gmail.com">emilyjreynolds00@gmail.com</a></p>
+        <p>LinkedIn: <a href=" https://www.linkedin.com/in/emily-reynolds-776547234 " target="_blank">Emily Reynolds</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row team-member align-items-center">
+    <div class="col-md-4 text-center">
+      <img src="/images/team-member3.jpg" alt="George Mabbutt">
+    </div>
+    <div class="col-md-8 bio">
+      <h2>George Mabbutt</h2>
+      <p>
+        Replace your bio here
+      </p>
+      <div class="contact-info">
+        <p>Email: <a href="mailto:member3@example.com">member3@example.com</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/member3" target="_blank">George Mabbutt</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row team-member flex-row-reverse align-items-center">
+    <div class="col-md-4 text-center">
+      <img src="/images/team-member4.jpg" alt="Sunjung Park">
+    </div>
+    <div class="col-md-8 bio">
+      <h2>Sunjung Park</h2>
+      <p>
+        Replace your bio here
+      </p>
+      <div class="contact-info">
+        <p>Email: <a href="mailto:member4@example.com">member4@example.com</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/member4" target="_blank">Sunjung Park</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -97,6 +97,8 @@ public class ContentController {
     @GetMapping("/map")
     public String map() {return "map";}
 
+    @GetMapping("/team-members")
+    public String teamMembers() {return "team-members";}
 
     @GetMapping("/adoption")
     public String adoption() {return "adoption";}
